@@ -1496,7 +1496,7 @@ async function getWeekMatchups(week) {
 
       const pairs = await getWeekMatchups(week);
       if (!pairs || !pairs.length) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No matchups found for Week ${week}. Check league ID or try syncing.</div>`;
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No matchups found for Week ${week}.</div>`;
         return;
       }
 
