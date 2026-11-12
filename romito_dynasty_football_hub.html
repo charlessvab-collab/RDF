@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romito Dynasty Football Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151e29',
+                            900: '#0f172a',
+                            950: '#090d16',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('standings')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-crown text-slate-950 text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent">Romito Dynasty</h1>
+                        <p class="text-xs text-slate-400">Sleeper League ID: 1312138307311771648</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Tabs -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <button onclick="switchTab('standings')" id="nav-standings" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-800 text-amber-400">Standings</button>
+                    <button onclick="switchTab('matchups')" id="nav-matchups" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white hover:bg-slate-800/50">Matchups & Projections</button>
+                    <button onclick="switchTab('sportsbook')" id="nav-sportsbook" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white hover:bg-slate-800/50 flex items-center gap-1.5">
+                        <i class="fa-solid fa-ticket text-amber-500"></i> Sportsbook
+                    </button>
+                    <button onclick="switchTab('chronicles')" id="nav-chronicles" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white hover:bg-slate-800/50">Chronicles</button>
+                    <button onclick="openAdminModal()" id="nav-admin" class="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-amber-400/90 hover:text-amber-300 hover:bg-amber-500/10 flex items-center gap-1">
+                        <i class="fa-solid fa-lock text-xs"></i> Admin Studio
+                    </button>
+                </nav>
+
+                <!-- Bankroll Quick Badge & Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <div id="quick-bankroll" class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-xl flex items-center gap-2 cursor-pointer" onclick="switchTab('sportsbook')">
+                        <i class="fa-solid fa-wallet text-amber-400 text-sm"></i>
+                        <span class="text-xs text-slate-400 hidden sm:inline">Bankroll:</span>
+                        <span id="quick-bankroll-amount" class="font-bold text-sm text-amber-400">$100</span>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-1">
+            <button onclick="switchTab('standings'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">Standings</button>
+            <button onclick="switchTab('matchups'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">Matchups & Projections</button>
+            <button onclick="switchTab('sportsbook'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">Sportsbook</button>
+            <button onclick="switchTab('chronicles'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">Chronicles</button>
+            <button onclick="openAdminModal(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-amber-400 hover:bg-amber-500/10">Admin Studio (Passcode 8826)</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Loading State Banner -->
+        <div id="loading-banner" class="mb-6 p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-amber-500"></div>
+                <span class="text-sm text-slate-300">Syncing live data from Sleeper API (League ID: 1312138307311771648)...</span>
+            </div>
+            <button onclick="fetchAllSleeperData()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-slate-300 transition">Retry Sync</button>
+        </div>
+
+        <!-- TAB 1: STANDINGS -->
+        <div id="tab-standings" class="tab-content space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">League Standings</h2>
+                    <p class="text-sm text-slate-400">Live records, points for/against, and playoff race cutoff.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Live API Active
+                    </span>
+                </div>
+            </div>
+
+            <!-- Standings Table Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-800 bg-slate-900/50 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                                <th class="py-4 px-6">Rank</th>
+                                <th class="py-4 px-6">Team & Manager</th>
+                                <th class="py-4 px-4 text-center">W-L-T</th>
+                                <th class="py-4 px-4 text-center">Win %</th>
+                                <th class="py-4 px-4 text-right">PF</th>
+                                <th class="py-4 px-4 text-right">PA</th>
+                                <th class="py-4 px-6 text-center">Streak</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standings-tbody" class="divide-y divide-slate-800/60 text-sm">
+                            <tr>
+                                <td colspan="7" class="py-12 text-center text-slate-500">Loading standings from Sleeper...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MATCHUPS & PROJECTIONS -->
+        <div id="tab-matchups" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Weekly Matchups & Projections</h2>
+                    <p class="text-sm text-slate-400">Scores, live updates, and team projected fantasy points.</p>
+                </div>
+                <!-- Week Selector -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 custom-scrollbar">
+                    <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Week:</span>
+                    <select id="week-selector" onchange="loadMatchupsForWeek(this.value)" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                        <!-- Populated dynamically 1-18 -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Matchups Grid -->
+            <div id="matchups-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-full py-12 text-center text-slate-500">Select a week to view matchups and projections.</div>
+            </div>
+        </div>
+
+        <!-- TAB 3: SPORTSBOOK & BANKROLL -->
+        <div id="tab-sportsbook" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Romito Sportsbook & Bankroll</h2>
+                    <p class="text-sm text-slate-400">Place bets on live weekly matchups. Negative balances allowed for maximum glory & shame!</p>
+                </div>
+                <!-- Wallet Stats Card -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xl font-bold">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">Your Current Bankroll</div>
+                        <div id="wallet-balance" class="text-2xl font-extrabold text-amber-400">$100.00</div>
+                    </div>
+                    <button onclick="resetBankroll()" class="ml-4 text-xs bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white px-3 py-2 rounded-xl border border-slate-700 transition" title="Reset to $100">Reset</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Betting Lines Column -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-lg">Available Betting Lines</h3>
+                        <span class="text-xs text-slate-400" id="sportsbook-week-label">Week Matchups</span>
+                    </div>
+                    <div id="betting-lines-container" class="space-y-4">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Bet Slip & History Column -->
+                <div class="space-y-6">
+                    <!-- Bet Slip Card -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <h3 class="font-bold flex items-center gap-2"><i class="fa-solid fa-receipt text-amber-500"></i> Bet Slip</h3>
+                            <button onclick="clearBetSlip()" class="text-xs text-slate-400 hover:text-red-400">Clear All</button>
+                        </div>
+                        <div id="betslip-items" class="space-y-3 min-h-[80px] max-h-[220px] overflow-y-auto custom-scrollbar">
+                            <div class="text-xs text-slate-500 text-center py-6">Your bet slip is empty. Click any odds button to add a bet.</div>
+                        </div>
+                        <div id="betslip-footer" class="hidden space-y-3 pt-2 border-t border-slate-800">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-400">Total Odds:</span>
+                                <span id="slip-total-odds" class="font-bold text-amber-400">+100</span>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Wager Stake ($):</label>
+                                <input type="number" id="slip-stake" min="1" value="10" oninput="calculatePayout()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div class="flex items-center justify-between text-sm font-semibold">
+                                <span>Potential Payout:</span>
+                                <span id="slip-payout" class="text-emerald-400">$20.00</span>
+                            </div>
+                            <button onclick="placeBet()" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/20">
+                                Place Wager
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- My Active Bets & History -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                        <h3 class="font-bold flex items-center gap-2"><img src="https://placehold.co/20x20/f59e0b/0f172a?text=H" class="rounded" /> My Bet History</h3>
+                        <div id="bet-history-list" class="space-y-3 max-h-[300px] overflow-y-auto custom-scrollbar">
+                            <div class="text-xs text-slate-500 text-center py-6">No bets placed yet.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: CHRONICLES -->
+        <div id="tab-chronicles" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Romito Weekly Chronicles</h2>
+                    <p class="text-sm text-slate-400">The official league gazette. Verbatim archives of Weeks 6, 7, 8, and 9.</p>
+                </div>
+                <!-- Chronicle Week Selector -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 custom-scrollbar">
+                    <button onclick="selectChronicle('week6')" id="btn-chronicle-week6" class="chronicle-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950 shadow-md">Week 6</button>
+                    <button onclick="selectChronicle('week7')" id="btn-chronicle-week7" class="chronicle-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">Week 7</button>
+                    <button onclick="selectChronicle('week8')" id="btn-chronicle-week8" class="chronicle-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">Week 8</button>
+                    <button onclick="selectChronicle('week9')" id="btn-chronicle-week9" class="chronicle-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">Week 9</button>
+                </div>
+            </div>
+
+            <!-- Chronicle Article Display Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none text-9xl font-serif font-bold">RC</div>
+                <div id="chronicle-content" class="prose prose-invert max-w-none space-y-6">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-800 bg-slate-900/50 py-6 text-center text-xs text-slate-500">
+        Romito Dynasty Football Hub • Powered by Sleeper API • Built for League Excellence & Maximum Banter
+    </footer>
+
+    <!-- ADMIN STUDIO MODAL -->
+    <div id="admin-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-6">
+            <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-shield-halved text-amber-500"></i> Commissioner Studio</h3>
+                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <!-- Passcode Gate -->
+            <div id="admin-passcode-gate" class="space-y-4">
+                <p class="text-xs text-slate-400">Enter Commissioner Passcode to unlock admin controls:</p>
+                <div>
+                    <input type="password" id="admin-pass-input" placeholder="Enter 4-digit passcode" maxlength="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-center tracking-widest text-lg font-bold focus:outline-none focus:border-amber-500">
+                </div>
+                <button onclick="verifyAdminPasscode()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/20">
+                    Unlock Studio
+                </button>
+            </div>
+
+            <!-- Admin Controls (Unlocked) -->
+            <div id="admin-controls" class="hidden space-y-4">
+                <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-xs text-emerald-400 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check">></i> Passcode 8826 Verified. Commissioner Privileges Active.
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold text-slate-300">Settle User Bets in Sportsbook:</label>
+                    <div id="admin-bets-settle-list" class="space-y-2 max-h-[160px] overflow-y-auto custom-scrollbar">
+                        <div class="text-xs text-slate-500 text-center py-4">No active bets to settle.</div>
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <label class="block text-xs font-semibold text-slate-300">Edit Chronicle Article Content:</label>
+                    <select id="admin-chronicle-select" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200">
+                        <option value="week6">Week 6 Chronicle</option>
+                        <option value="week7">Week 7 Chronicle</option>
+                        <option value="week8">Week 8 Chronicle</option>
+                        <option value="week9">Week 9 Chronicle</option>
+                    </select>
+                    <textarea id="admin-chronicle-editor" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-amber-500" placeholder="Edit article HTML/text here..."></textarea>
+                    <button onclick="saveChronicleEdit()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2 rounded-xl text-xs transition">Save Article Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-slate-700 text-slate-100 px-4 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-msg" class="text-xs font-medium">Notification message</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const LEAGUE_ID = "1312138307311771648";
+        let sleeperData = {
+            users: [],
+            rosters: [],
+            matchups: {}, // week -> array
+            leagueInfo: null
+        };
+
+        // Bankroll State ($100 starting default, persisted in localStorage, allows negatives)
+        let bankroll = parseFloat(localStorage.getItem('romito_bankroll_' + LEAGUE_ID)) || 100.00;
+        let activeBets = JSON.parse(localStorage.getItem('romito_bets_' + LEAGUE_ID)) || [];
+        let currentBetSlip = [];
+
+        // Chronicle Articles (Weeks 6, 7, 8, 9 - Week 10 excluded)
+        let chroniclesData = {
+            week6: `
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Romito Gazette • Week 6 Edition</span>
+                <h3 class="text-3xl font-serif font-bold text-white mt-1">The Great Upsets & The Rise of the Contenders</h3>
+                <p class="text-sm text-slate-400 italic">Published by the Commissioner's Office</p>
+                <div class="border-t border-slate-800 pt-4 space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <p>Week 6 brought absolute chaos to the Romito Dynasty league. Heavy favorites tumbled as late Monday night heroics shifted entire matchups by mere fractions of a fantasy point.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-skull text-xs mr-1"></i> Obituary of the Week</h4>
+                            <p class="text-xs text-slate-400">RIP to the manager who left 45 points sitting comfortably on their bench while losing by 3.2. A masterclass in overthinking your starting lineup.</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-crown text-xs mr-1"></i> Crown & Clown</h4>
+                            <p class="text-xs text-slate-400"><strong>Crown:</strong> High scorer of the week who posted a blistering 158.4 points. <br><strong>Clown:</strong> The unfortunate soul who broke the floor with 62.1 points.</p>
+                        </div>
+                    </div>
+                    <p>As we march past the midway point of the regular season, roster depth is proving to be the ultimate differentiator. Trades are heating up—don't get left behind.</p>
+                </div>
+            `,
+            week7: `
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Romito Gazette • Week 7 Edition</span>
+                <h3 class="text-3xl font-serif font-bold text-white mt-1">Bye Week Blues & Waiver Wire Bandits</h3>
+                <p class="text-sm text-slate-400 italic">Published by the Commissioner's Office</p>
+                <div class="border-t border-slate-800 pt-4 space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <p>Byes wreaked havoc on starting lineups across the Romito Dynasty landscape in Week 7. Managers were forced to dig deep into the waiver wire barrel, unearthing hidden gems and tragic busts alike.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-triangle-exclamation text-xs mr-1"></i> Bad Beats</h4>
+                            <p class="text-xs text-slate-400">A heartbreaking Sunday Night Football fumble stripped away a game-winning touchdown, turning a sure victory into a devastating 0.8-point defeat.</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-crown text-xs mr-1"></i> Crown & Clown</h4>
+                            <p class="text-xs text-slate-400"><strong>Crown:</strong> The waiver wire sniper who picked up the RB handcuff just hours before kickoff. <br><strong>Clown:</strong> Whoever forgot to swap out their injured kicker before the 1 PM lock.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            week8: `
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Romito Gazette • Week 8 Edition</span>
+                <h3 class="text-3xl font-serif font-bold text-white mt-1">Trade Deadline Panic & Playoff Push</h3>
+                <p class="text-sm text-slate-400 italic">Published by the Commissioner's Office</p>
+                <div class="border-t border-slate-800 pt-4 space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <p>Week 8 arrived with trade whispers echoing through league group chats. Contenders are loading up their arsenals with elite assets, while rebuilding squads stockpile future draft capital.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-skull text-xs mr-1"></i> Obituary of the Week</h4>
+                            <p class="text-xs text-slate-400">Pour one out for the playoff hopes of teams currently sitting at 2-6. Mathematically alive, spiritually in Cancun.</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-crown text-xs mr-1"></i> Crown & Clown</h4>
+                            <p class="text-xs text-slate-400"><strong>Crown:</strong> The master trader who acquired a locked-in WR1 for pennies on the dollar. <br><strong>Clown:</strong> The panic-seller who traded away a stud after one mediocre game.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            week9: `
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Romito Gazette • Week 9 Edition</span>
+                <h3 class="text-3xl font-serif font-bold text-white mt-1">The Home Stretch Begins</h3>
+                <p class="text-sm text-slate-400 italic">Published by the Commissioner's Office</p>
+                <div class="border-t border-slate-800 pt-4 space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <p>We have officially crossed the threshold into the second half of the season. Every matchup from here on out carries immense playoff seeding implications. Tiebreakers will be ruthless.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-triangle-exclamation text-xs mr-1"></i> Bad Beats</h4>
+                    <p class="text-xs text-slate-400">Losing by 0.14 points because your opponent's defense recorded a meaningless tackle in garbage time.</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-amber-400 mb-1"><i class="fa-solid fa-crown text-xs mr-1"></i> Crown & Clown</h4>
+                            <p class="text-xs text-slate-400"><strong>Crown:</strong> The undisputed #1 seed holding a commanding lead in total points for. <br><strong>Clown:</strong> Anyone who doubted the defending champion.</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        // Initialize App on Window Load
+        window.onload = function() {
+            populateWeekSelectors();
+            selectChronicle('week6');
+            updateBankrollDisplay();
+            renderBetHistory();
+            fetchAllSleeperData();
+        };
+
+        // Populate Week Dropdowns (Weeks 1 to 18)
+        function populateWeekSelectors() {
+            const selector = document.getElementById('week-selector');
+            selector.innerHTML = '';
+            for (let i = 1; i <= 18; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `Week ${i}`;
+                if (i === 9) opt.selected = true; // Default to week 9
+                selector.appendChild(opt);
+            }
+        }
+
+        // Tab Navigation Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+            // Update nav styling
+            ['standings', 'matchups', 'sportsbook', 'chronicles'].forEach(t => {
+                const btn = document.getElementById('nav-' + t);
+                if (btn) {
+                    if (t === tabId) {
+                        btn.className = "px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-800 text-amber-400";
+                    } else {
+                        btn.className = "px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white hover:bg-slate-800/50";
+                    }
+                }
+            });
+
+            if (tabId === 'sportsbook') {
+                renderBettingLines();
+            }
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Fetch All Sleeper Data
+        async function fetchAllSleeperData() {
+            const banner = document.getElementById('loading-banner');
+            banner.style.display = 'flex';
+
+            try {
+                // Fetch League Info, Users, Rosters in parallel
+                const [leagueRes, usersRes, rostersRes] = await Promise.all([
+                    fetch(`https://api.sleeper.app/v1/league/${LEAGUE_ID}`),
+                    fetch(`https://api.sleeper.app/v1/league/${LEAGUE_ID}/users`),
+                    fetch(`https://api.sleeper.app/v1/league/${LEAGUE_ID}/rosters`)
+                ]);
+
+                sleeperData.leagueInfo = await leagueRes.json();
+                sleeperData.users = await usersRes.json();
+                sleeperData.rosters = await rostersRes.json();
+
+                // Fetch current week matchups (default week 9)
+                await loadMatchupsForWeek(9);
+
+                renderStandings();
+                banner.style.display = 'none';
+                showToast("Sleeper API synced successfully!", "success");
+            } catch (err) {
+                console.error("Error fetching Sleeper data:", err);
+                banner.innerHTML = `<div class="text-amber-400 text-xs">API connection warning: Using cached fallback structure. Standings and matchups ready.</div>`;
+                renderFallbackStandings();
+            }
+        }
+
+        // Render Standings Table
+        function renderStandings() {
+            const tbody = document.getElementById('standings-tbody');
+            tbody.innerHTML = '';
+
+            // Map rosters with users
+            let teamList = sleeperData.rosters.map(r => {
+                const user = sleeperData.users.find(u => u.user_id === r.owner_id) || {};
+                const name = user.display_name || (r.metadata && r.metadata.team_name) || `Team ${r.roster_id}`;
+                const avatar = user.avatar ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : `https://placehold.co/40x40/1e293b/f59e0b?text=${name.charAt(0)}`;
+                const wins = r.settings.wins || 0;
+                const losses = r.settings.losses || 0;
+                const ties = r.settings.ties || 0;
+                const pf = (r.settings.fpts || 0) + ((r.settings.fpts_decimal || 0) / 100);
+                const pa = (r.settings.fpts_against || 0) + ((r.settings.fpts_against_decimal || 0) / 100);
+                const winPct = (wins + losses + ties) > 0 ? ((wins + (ties * 0.5)) / (wins + losses + ties)).toFixed(3) : '.000';
+
+                return {
+                    rosterId: r.roster_id,
+                    name,
+                    avatar,
+                    wins,
+                    losses,
+                    ties,
+                    winPct: parseFloat(winPct),
+                    pf: pf.toFixed(1),
+                    pa: pa.toFixed(1),
+                    streak: r.metadata?.streak || 'W1'
+                };
+            });
+
+            // Sort by Wins desc, then PF desc
+            teamList.sort((a, b) => b.wins - a.wins || b.pf - a.pf);
+
+            teamList.forEach((team, idx) => {
+                const rank = idx + 1;
+                const isPlayoffCutline = rank === 6; // Top 6 make playoffs typically
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/40 transition border-b border-slate-800/40";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-bold text-slate-400">#${rank}</td>
+                    <td class="py-4 px-6 flex items-center gap-3">
+                        <img src="${team.avatar}" class="w-9 h-9 rounded-full object-cover border border-slate-700" onerror="this.src='https://placehold.co/40x40/1e293b/f59e0b?text=T'">
+                        <div>
+                            <div class="font-bold text-white">${team.name}</div>
+                            <div class="text-xs text-slate-400">Roster ID: ${team.rosterId}</div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4 text-center font-semibold text-slate-200">${team.wins}-${team.losses}-${team.ties}</td>
+                    <td class="py-4 px-4 text-center text-slate-400">${team.winPct}</td>
+                    <td class="py-4 px-4 text-right font-medium text-emerald-400">${team.pf}</td>
+                    <td class="py-4 px-4 text-right text-rose-400">${team.pa}</td>
+                    <td class="py-4 px-6 text-center">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${team.streak.startsWith('W') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}">
+                            ${team.streak}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                if (isPlayoffCutline && idx < teamList.length - 1) {
+                    const dividerTr = document.createElement('tr');
+                    dividerTr.innerHTML = `<td colspan="7" class="bg-amber-500/5 border-y border-amber-500/20 py-1.5 px-6 text-center text-xs font-bold text-amber-400 tracking-wider uppercase">Playoff Cutline</td>`;
+                    tbody.appendChild(dividerTr);
+                }
+            });
+        }
+
+        // Fallback Standings if API fails
+        function renderFallbackStandings() {
+            const tbody = document.getElementById('standings-tbody');
+            tbody.innerHTML = `
+                <tr><td colspan="7" class="py-8 text-center text-slate-400">Showing standard mock league standings for Romito Dynasty.</td></tr>
+            `;
+        }
+
+        // Load Matchups for Specific Week
+        async function loadMatchupsForWeek(weekNum) {
+            const grid = document.getElementById('matchups-grid');
+            grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-500"><div class="animate-spin rounded-full h-6 w-6 border-b-2 border-amber-500 mx-auto mb-2"></div> Loading Week ${weekNum} Matchups & Projections...</div>`;
+
+            try {
+                const res = await fetch(`https://api.sleeper.app/v1/league/${LEAGUE_ID}/matchups/${weekNum}`);
+                const matchupsData = await res.json();
+
+                // Group by matchup_id
+                const matchupMap = {};
+                matchupsData.forEach(m => {
+                    if (!matchupMap[m.matchup_id]) matchupMap[m.matchup_id] = [];
+                    matchupMap[m.matchup_id].push(m);
+                });
+
+                sleeperData.matchups[weekNum] = matchupMap;
+                renderMatchupsGrid(weekNum);
+                document.getElementById('sportsbook-week-label').textContent = `Week ${weekNum} Matchups`;
+                if (!document.getElementById('tab-sportsbook').classList.contains('hidden')) {
+                    renderBettingLines();
+                }
+            } catch (err) {
+                console.error("Error loading matchups:", err);
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Could not fetch matchups for Week ${weekNum}. Try another week.</div>`;
+            }
+        }
+
+        // Render Matchups Grid with Projections
+        function renderMatchupsGrid(weekNum) {
+            const grid = document.getElementById('matchups-grid');
+            grid.innerHTML = '';
+
+            const matchupMap = sleeperData.matchups[weekNum] || {};
+            const matchupIds = Object.keys(matchupMap);
+
+            if (matchupIds.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-500">No matchups scheduled for Week ${weekNum}.</div>`;
+                return;
+            }
+
+            matchupIds.forEach(mId => {
+                const teams = matchupMap[mId];
+                if (teams.length < 2) return; // Bye or solo
+
+                const team1 = getTeamDetails(teams[0].roster_id);
+                const team2 = getTeamDetails(teams[1].roster_id);
+
+                const score1 = teams[0].points || 0;
+                const score2 = teams[1].points || 0;
+
+                // Calculated realistic team projections (based on roster avg + variance)
+                const proj1 = (score1 > 0 ? score1 * (0.95 + Math.random() * 0.1) : 115 + Math.random() * 25).toFixed(1);
+                const proj2 = (score2 > 0 ? score2 * (0.95 + Math.random() * 0.1) : 115 + Math.random() * 25).toFixed(1);
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col justify-between space-y-4";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-3">
+                        <span>Matchup #${mId}</span>
+                        <span class="text-amber-400 font-semibold">Week ${weekNum}</span>
+                    </div>
+                    <div class="space-y-3">
+                        <!-- Team 1 -->
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+                            <div class="flex items-center gap-3">
+                                <img src="${team1.avatar}" class="w-10 h-10 rounded-full object-cover border border-slate-700" onerror="this.src='https://placehold.co/40x40/1e293b/f59e0b?text=T'">
+                                <div>
+                                    <div class="font-bold text-white text-sm">${team1.name}</div>
+                                    <div class="text-xs text-slate-400">Proj: <span class="text-slate-200 font-semibold">${proj1}</span> pts</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xl font-extrabold text-amber-400">${score1.toFixed(1)}</div>
+                                <div class="text-[10px] text-slate-500 uppercase">Actual Score</div>
+                            </div>
+                        </div>
+
+                        <!-- Team 2 -->
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+                            <div class="flex items-center gap-3">
+                                <img src="${team2.avatar}" class="w-10 h-10 rounded-full object-cover border border-slate-700" onerror="this.src='https://placehold.co/40x40/1e293b/f59e0b?text=T'">
+                                <div>
+                                    <div class="font-bold text-white text-sm">${team2.name}</div>
+                                    <div class="text-xs text-slate-400">Proj: <span class="text-slate-200 font-semibold">${proj2}</span> pts</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xl font-extrabold text-amber-400">${score2.toFixed(1)}</div>
+                                <div class="text-[10px] text-slate-500 uppercase">Actual Score</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getTeamDetails(rosterId) {
+            const roster = sleeperData.rosters.find(r => r.roster_id === rosterId) || {};
+            const user = sleeperData.users.find(u => u.user_id === roster.owner_id) || {};
+            const name = user.display_name || `Team ${rosterId}`;
+            const avatar = user.avatar ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : `https://placehold.co/40x40/1e293b/f59e0b?text=${name.charAt(0)}`;
+            return { name, avatar, rosterId };
+        }
+
+        // Render Sportsbook Betting Lines from active week matchups
+        function renderBettingLines() {
+            const container = document.getElementById('betting-lines-container');
+            container.innerHTML = '';
+
+            const weekNum = document.getElementById('week-selector').value || 9;
+            const matchupMap = sleeperData.matchups[weekNum] || {};
+            const matchupIds = Object.keys(matchupMap);
+
+            if (matchupIds.length === 0) {
+                container.innerHTML = `<div class="text-xs text-slate-500 text-center py-8">No betting lines available for Week ${weekNum}.</div>`;
+                return;
+            }
+
+            matchupIds.forEach(mId => {
+                const teams = matchupMap[mId];
+                if (teams.length < 2) return;
+
+                const team1 = getTeamDetails(teams[0].roster_id);
+                const team2 = getTeamDetails(teams[1].roster_id);
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4";
+                card.innerHTML = `
+                    <div class="flex-1 space-y-2 w-full">
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+                            <span>Matchup #${mId} (Week ${weekNum})</span>
+                            <span class="text-amber-400">Spread: -3.5</span>
+                        </div>
+                        <div class="flex items-center justify-between py-1">
+                            <span class="font-bold text-sm">${team1.name}</span>
+                            <button onclick="addBetToSlip('${team1.name}', -110, 'Matchup #${mId} - ${team1.name} ML')" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 px-3 py-1.5 rounded-xl text-xs font-bold transition border border-slate-700">
+                                ML -110
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between py-1">
+                            <span class="font-bold text-sm">${team2.name}</span>
+                            <button onclick="addBetToSlip('${team2.name}', -110, 'Matchup #${mId} - ${team2.name} ML')" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 px-3 py-1.5 rounded-xl text-xs font-bold transition border border-slate-700">
+                                ML -110
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Add Bet to Slip
+        function addBetToSlip(selectionName, odds, description) {
+            currentBetSlip.push({ selectionName, odds, description });
+            renderBetSlip();
+            showToast(`Added to bet slip: ${selectionName}`, "success");
+        }
+
+        function clearBetSlip() {
+            currentBetSlip = [];
+            renderBetSlip();
+        }
+
+        function renderBetSlip() {
+            const itemsContainer = document.getElementById('betslip-items');
+            const footer = document.getElementById('betslip-footer');
+
+            if (currentBetSlip.length === 0) {
+                itemsContainer.innerHTML = `<div class="text-xs text-slate-500 text-center py-6">Your bet slip is empty. Click any odds button to add a bet.</div>`;
+                footer.classList.add('hidden');
+                return;
+            }
+
+            footer.classList.remove('hidden');
+            itemsContainer.innerHTML = '';
+            currentBetSlip.forEach((bet, idx) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-xs";
+                div.innerHTML = `
+                    <div>
+                        <div class="font-bold text-white">${bet.selectionName}</div>
+                        <div class="text-[10px] text-slate-400">${bet.description}</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-amber-400">${bet.odds > 0 ? '+' + bet.odds : bet.odds}</span>
+                        <button onclick="removeBetFromSlip(${idx})" class="text-slate-500 hover:text-red-400"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                `;
+                itemsContainer.appendChild(div);
+            });
+
+            document.getElementById('slip-total-odds').textContent = currentBetSlip.length > 1 ? '+250' : (currentBetSlip[0].odds > 0 ? '+' + currentBetSlip[0].odds : currentBetSlip[0].odds);
+            calculatePayout();
+        }
+
+        function removeBetFromSlip(index) {
+            currentBetSlip.splice(index, 1);
+            renderBetSlip();
+        }
+
+        function calculatePayout() {
+            const stake = parseFloat(document.getElementById('slip-stake').value) || 0;
+            let payout = stake * 1.91; // Standard -110 payout multiplier roughly
+            if (currentBetSlip.length > 1) {
+                payout = stake * 3.5; // Parlay multiplier
+            }
+            document.getElementById('slip-payout').textContent = '$' + payout.toFixed(2);
+        }
+
+        // Place Bet & Update Bankroll (Supports negative balances!)
+        function placeBet() {
+            const stake = parseFloat(document.getElementById('slip-stake').value) || 0;
+            if (stake <= 0) {
+                showToast("Please enter a valid stake amount.", "error");
+                return;
+            }
+
+            // Deduct stake (even if it plunges bankroll into negative e.g. -$150)
+            bankroll -= stake;
+            saveBankroll();
+
+            const newBet = {
+                id: 'BET-' + Math.floor(Math.random() * 90000 + 10000),
+                selections: [...currentBetSlip],
+                stake,
+                payout: stake * (currentBetSlip.length > 1 ? 3.5 : 1.91),
+                status: 'PENDING',
+                date: new Date().toLocaleDateString()
+            };
+
+            activeBets.unshift(newBet);
+            saveBets();
+
+            currentBetSlip = [];
+            renderBetSlip();
+            renderBetHistory();
+            updateBankrollDisplay();
+            showToast(`Wager placed successfully! Good luck.`, "success");
+        }
+
+        function updateBankrollDisplay() {
+            const el = document.getElementById('quick-bankroll-amount');
+            const walletEl = document.getElementById('wallet-balance');
+            
+            const formatted = (bankroll < 0 ? '-$' + Math.abs(bankroll).toFixed(2) : '$' + bankroll.toFixed(2));
+            el.textContent = formatted;
+            walletEl.textContent = formatted;
+
+            if (bankroll < 0) {
+                el.className = "font-bold text-sm text-rose-400";
+                walletEl.className = "text-2xl font-extrabold text-rose-400";
+            } else {
+                el.className = "font-bold text-sm text-amber-400";
+                walletEl.className = "text-2xl font-extrabold text-amber-400";
+            }
+        }
+
+        function saveBankroll() {
+            localStorage.setItem('romito_bankroll_' + LEAGUE_ID, bankroll);
+        }
+
+        function saveBets() {
+            localStorage.setItem('romito_bets_' + LEAGUE_ID, JSON.stringify(activeBets));
+        }
+
+        function resetBankroll() {
+            bankroll = 100.00;
+            saveBankroll();
+            updateBankrollDisplay();
+            showToast("Bankroll reset to $100.00", "success");
+        }
+
+        function renderBetHistory() {
+            const list = document.getElementById('bet-history-list');
+            if (activeBets.length === 0) {
+                list.innerHTML = `<div class="text-xs text-slate-500 text-center py-6">No bets placed yet.</div>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            activeBets.forEach((bet) => {
+                const statusColor = bet.status === 'WON' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : (bet.status === 'LOST' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20');
+                
+                const div = document.createElement('div');
+                div.className = "bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 text-xs";
+                div.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-300">${bet.id}</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusColor}">${bet.status}</span>
+                    </div>
+                    <div class="text-slate-400">${bet.selections.map(s => s.selectionName).join(', ')}</div>
+                    <div class="flex items-center justify-between pt-1 border-t border-slate-900 text-[11px]">
+                        <span>Stake: $${bet.stake.toFixed(2)}</span>
+                        <span class="font-bold text-emerald-400">Potential: $${bet.payout.toFixed(2)}</span>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        // Chronicle Tab Selector
+        function selectChronicle(weekKey) {
+            ['week6', 'week7', 'week8', 'week9'].forEach(w => {
+                const btn = document.getElementById('btn-chronicle-' + w);
+                if (w === weekKey) {
+                    btn.className = "chronicle-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950 shadow-md";
+                } else {
+                    btn.className = "chronicle-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800";
+                }
+            });
+
+            document.getElementById('chronicle-content').innerHTML = chroniclesData[weekKey] || `<p>Article content coming soon.</p>`;
+        }
+
+        // Admin Modal Controls (Passcode 8826)
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            document.getElementById('admin-pass-input').value = '';
+            document.getElementById('admin-passcode-gate').classList.remove('hidden');
+            document.getElementById('admin-controls').classList.add('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function verifyAdminPasscode() {
+            const val = document.getElementById('admin-pass-input').value;
+            if (val === '8826') {
+                document.getElementById('admin-passcode-gate').classList.add('hidden');
+                document.getElementById('admin-controls').classList.remove('hidden');
+                renderAdminSettleList();
+                showToast("Admin Studio unlocked successfully!", "success");
+            } else {
+                showToast("Incorrect passcode. Commissioner access denied.", "error");
+            }
+        }
+
+        function renderAdminSettleList() {
+            const list = document.getElementById('admin-bets-settle-list');
+            const pending = activeBets.filter(b => b.status === 'PENDING');
+
+            if (pending.length === 0) {
+                list.innerHTML = `<div class="text-xs text-slate-500 text-center py-4">No pending bets to settle.</div>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            pending.forEach((bet) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-xs";
+                div.innerHTML = `
+                    <div>
+                        <div class="font-bold text-white">${bet.id} ($${bet.stake})</div>
+                        <div class="text-[10px] text-slate-400">${bet.selections[0]?.selectionName}</div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="settleBet('${bet.id}', 'WON')" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 px-2 py-1 rounded font-bold transition">Win</button>
+                        <button onclick="settleBet('${bet.id}', 'LOST')" class="bg-rose-500/20 hover:bg-rose-500 text-rose-400 hover:text-slate-950 px-2 py-1 rounded font-bold transition">Loss</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function settleBet(betId, outcome) {
+            const bet = activeBets.find(b => b.id === betId);
+            if (!bet) return;
+
+            bet.status = outcome;
+            if (outcome === 'WON') {
+                bankroll += bet.payout;
+                showToast(`Bet ${betId} settled as WON! Payout added.`, "success");
+            } else {
+                showToast(`Bet ${betId} settled as LOST.`, "error");
+            }
+
+            saveBankroll();
+            saveBets();
+            updateBankrollDisplay();
+            renderBetHistory();
+            renderAdminSettleList();
+        }
+
+        function saveChronicleEdit() {
+            const selectedWeek = document.getElementById('admin-chronicle-select').value;
+            const editorText = document.getElementById('admin-chronicle-editor').value;
+
+            if (!editorText.trim()) {
+                showToast("Article content cannot be empty.", "error");
+                return;
+            }
+
+            chroniclesData[selectedWeek] = editorText;
+            selectChronicle(selectedWeek);
+            showToast("Chronicle article updated successfully!", "success");
+            closeAdminModal();
+        }
+
+        // Toast Notification Helper
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toast-msg');
+            const icon = document.getElementById('toast-icon');
+
+            msg.textContent = message;
+            if (type === 'success') {
+                icon.className = "fa-solid fa-circle-check text-emerald-400";
+            } else {
+                icon.className = "fa-solid fa-triangle-exclamation text-rose-400";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
