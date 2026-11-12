@@ -1455,45 +1455,48 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     // =====================================================================
 async function getWeekMatchups(week) {
       if (state.matchupsCache[week]) return state.matchupsCache[week];
-      const res = await fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/matchups/${week}`).then(r => r.json()).catch(() => []);
-      
-      const grouped = {};
-      (Array.isArray(res) ? res : []).forEach(m => {
-        if (!m.matchup_id) return;
-        if (!grouped[m.matchup_id]) grouped[m.matchup_id] = [];
-        grouped[m.matchup_id].push(m);
-      });
+      try {
+        const res = await fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/matchups/${week}`).then(r => r.json());
+        if (!Array.isArray(res) || res.length === 0) return [];
 
-      const pairs = Object.keys(grouped).sort((a, b) => Number(a) - Number(b)).map(mid => {
-        const pair = grouped[mid];
-        const mA = pair[0] || {};
-        const mB = pair[1] || {};
-        const tA = state.teams.find(t => t.rosterId === mA.roster_id) || { rosterId: mA.roster_id, teamName: `Team ${mA.roster_id}`, managerName: '', avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T1' };
-        const tB = state.teams.find(t => t.rosterId === mB.roster_id) || { rosterId: mB.roster_id, teamName: `Team ${mB.roster_id}`, managerName: '', avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T2' };
+        const grouped = {};
+        res.forEach(m => {
+          if (!m.matchup_id) return;
+          if (!grouped[m.matchup_id]) grouped[m.matchup_id] = [];
+          grouped[m.matchup_id].push(m);
+        });
 
-        const ptsA = Number(mA.points || 0);
-        const ptsB = Number(mB.points || 0);
+        const pairs = Object.keys(grouped).sort((a, b) => Number(a) - Number(b)).map(mid => {
+          const pair = grouped[mid];
+          const mA = pair[0] || {};
+          const mB = pair[1] || {};
+          const tA = state.teams.find(t => t.rosterId === mA.roster_id) || { rosterId: mA.roster_id, teamName: `Team ${mA.roster_id}`, managerName: 'Manager', avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T1' };
+          const tB = state.teams.find(t => t.rosterId === mB.roster_id) || { rosterId: mB.roster_id, teamName: `Team ${mB.roster_id}`, managerName: 'Manager', avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T2' };
 
-        return {
-          matchupId: Number(mid),
-          week: Number(week),
-          away: { team: tA, points: ptsA },
-          home: { team: tB, points: ptsB }
-        };
-      });
+          return {
+            matchupId: Number(mid),
+            week: Number(week),
+            away: { team: tA, points: Number(mA.points || 0) },
+            home: { team: tB, points: Number(mB.points || 0) }
+          };
+        });
 
-      state.matchupsCache[week] = pairs;
-      return pairs;
+        state.matchupsCache[week] = pairs;
+        return pairs;
+      } catch (e) {
+        console.error("Matchups fetch error:", e);
+        return [];
+      }
     }
 
     async function renderMatchupsGrid(week) {
       const grid = document.getElementById('matchups-grid');
       if (!grid) return;
-      grid.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400">Loading Week ${week} live scores...</div>`;
+      grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Loading Week ${week} matchups...</div>`;
 
       const pairs = await getWeekMatchups(week);
-      if (!pairs.length) {
-        grid.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400">No matchups scheduled for Week ${week}.</div>`;
+      if (!pairs || !pairs.length) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No matchups found for Week ${week}. Check league ID or try syncing.</div>`;
         return;
       }
 
@@ -1501,9 +1504,9 @@ async function getWeekMatchups(week) {
         const a = p.away;
         const h = p.home;
         const diff = Math.abs(a.points - h.points).toFixed(2);
-        let statusText = 'Matchup In Progress';
+        let statusText = 'Live Matchup';
         if (a.points === 0 && h.points === 0) statusText = 'Yet To Play';
-        else if (a.points > 0 && h.points > 0 && a.points + h.points > 300) statusText = 'Final Score';
+        else if (a.points > 0 && h.points > 0) statusText = 'In Progress / Final';
 
         return `
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4 hover:border-slate-700 transition">
@@ -1523,7 +1526,7 @@ async function getWeekMatchups(week) {
               </div>
               <div class="text-right shrink-0">
                 <div class="text-2xl font-black ${a.points > h.points ? 'text-emerald-400' : 'text-white'}">${a.points.toFixed(2)}</div>
-                <div class="text-[10px] uppercase font-bold text-slate-500">Live Score</div>
+                <div class="text-[10px] uppercase font-bold text-slate-500">Score</div>
               </div>
             </div>
 
@@ -1538,7 +1541,7 @@ async function getWeekMatchups(week) {
               </div>
               <div class="text-right shrink-0">
                 <div class="text-2xl font-black ${h.points > a.points ? 'text-emerald-400' : 'text-white'}">${h.points.toFixed(2)}</div>
-                <div class="text-[10px] uppercase font-bold text-slate-500">Live Score</div>
+                <div class="text-[10px] uppercase font-bold text-slate-500">Score</div>
               </div>
             </div>
 
