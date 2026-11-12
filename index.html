@@ -1456,14 +1456,23 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
 async function getWeekMatchups(week) {
       if (state.matchupsCache[week]) return state.matchupsCache[week];
       
-      const leagueId = SLEEPER_LEAGUE_ID;
-      const scoringSettings = (state.league && state.league.scoring_settings) || { rec: 1 }; // fallback to PPR
+      const scoringSettings = (state.league && state.league.scoring_settings) || { rec: 1 };
 
-      // Fetch matchups, league roster player details, and official Sleeper projections in parallel
+      // Fetch matchups and Sleeper's actual weekly projections feed in parallel
       const [matchupsRes, projRes] = await Promise.all([
-        fetch(`https://api.sleeper.app/v1/league/${leagueId}/matchups/${week}`).then(r => r.json()).catch(() => []),
-        fetch(`https://api.sleeper.com/projections/nfl/regular/2026/${week}`).then(r => r.json()).catch(() => ({}))
+        fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/matchups/${week}`).then(r => r.json()).catch(() => []),
+        fetch(`https://api.sleeper.app/projections/nfl/2026/${week}?season_type=regular`).then(r => r.json()).catch(() => ([]))
       ]);
+
+      // Convert projection array into a dictionary mapped by player_id
+      const projMap = {};
+      if (Array.isArray(projRes)) {
+        projRes.forEach(p => {
+          if (p && p.player_id) {
+            projMap[p.player_id] = p.stats || {};
+          }
+        });
+      }
 
       const grouped = {};
       (Array.isArray(matchupsRes) ? matchupsRes : []).forEach(m => {
@@ -1482,14 +1491,13 @@ async function getWeekMatchups(week) {
         const ptsA = Number(mA.points || 0);
         const ptsB = Number(mB.points || 0);
 
-        // Calculate exact team projected score using Sleeper's projection stats and league scoring settings
+        // Sum up projected stats for each active starter based on league scoring settings
         let projA = 0;
         if (Array.isArray(mA.starters)) {
           mA.starters.forEach(pid => {
-            if (pid && pid !== '0' && projRes[pid]) {
-              const stats = projRes[pid].stats || {};
+            if (pid && pid !== '0' && projMap[pid]) {
+              const stats = projMap[pid];
               let pSum = 0;
-              // Compute points based on league scoring settings (passing yards/TDs, rushing, receiving, PPR)
               pSum += (stats.pass_yd || 0) * (scoringSettings.pass_yd || 0.04);
               pSum += (stats.pass_td || 0) * (scoringSettings.pass_td || 4);
               pSum += (stats.pass_int || 0) * (scoringSettings.pass_int || -2);
@@ -1508,8 +1516,8 @@ async function getWeekMatchups(week) {
         let projB = 0;
         if (Array.isArray(mB.starters)) {
           mB.starters.forEach(pid => {
-            if (pid && pid !== '0' && projRes[pid]) {
-              const stats = projRes[pid].stats || {};
+            if (pid && pid !== '0' && projMap[pid]) {
+              const stats = projMap[pid];
               let pSum = 0;
               pSum += (stats.pass_yd || 0) * (scoringSettings.pass_yd || 0.04);
               pSum += (stats.pass_td || 0) * (scoringSettings.pass_td || 4);
