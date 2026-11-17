@@ -15,27 +15,253 @@
             amber: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
           },
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Impact', 'Arial Black', 'sans-serif']
+            sans: ['Work Sans', 'Inter', 'system-ui', 'sans-serif'],
+            display: ['Archivo Black', 'Impact', 'Arial Black', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
           }
         }
       }
     };
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500;700;800&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-    iframe.chronicle-frame { width: 100%; border: none; display: block; border-radius: 0.85rem; background: #14171a; min-height: 600px; }
+    iframe.chronicle-frame { width: 100%; border: none; display: block; border-radius: 0.85rem; background: #14171a; min-height: 750px; }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-amber-400 selection:text-slate-950">
 
   <!-- ===================================================================== -->
-  <!-- VERBATIM ARCHIVE TEMPLATES (ISOLATED FROM JS PARSER TO PREVENT CRASH) -->
+  <!-- VERBATIM EMBEDDED CHRONICLES (WEEKS 10 DOWN TO 6)                     -->
   <!-- ===================================================================== -->
+
+  <!-- WEEK 10 FULL VERBATIM TEMPLATE -->
+  <template id="tpl-week-10"><!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Weekly Grind — Week 10</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8e9ea;--surface:#f6f6f4;--ink:#1b1f23;--mute:#5a626a;--line:#c5c8cb;--hazard:#f2b705;--blood:#b3121f;--win:#17692f;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171a;--surface:#1d2125;--ink:#eceff1;--mute:#9aa3ab;--line:#343a40;--blood:#ff5a64;--win:#5fd18a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14171a;--surface:#1d2125;--ink:#eceff1;--mute:#9aa3ab;--line:#343a40;--blood:#ff5a64;--win:#5fd18a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.02rem/1.55 'Work Sans',system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 40px}
+header{padding:34px 0 22px;border-bottom:6px solid var(--hazard)}
+h1{font:400 clamp(2.6rem,10vw,4.4rem)/.95 'Archivo Black',Impact,sans-serif;margin:0;letter-spacing:-.01em}
+.sub{margin:10px 0 0;color:var(--mute);font-weight:600}
+.lede{font:400 1.45rem/1.15 'Archivo Black',Impact,sans-serif;margin:26px 0 8px}
+h2{font:400 1.7rem/1.1 'Archivo Black',Impact,sans-serif;margin:42px 0 4px;padding-top:14px;border-top:2px solid var(--ink)}
+.kick{color:var(--mute);margin:0 0 16px}
+.game{background:var(--surface);border-left:6px solid var(--line);padding:14px 16px;margin:14px 0}
+.game.hot{border-left-color:var(--hazard)}
+.game.bad{border-left-color:var(--blood)}
+.score{display:flex;justify-content:space-between;gap:10px;font-weight:600;flex-wrap:wrap}
+.score b{font:400 1.05rem 'Archivo Black',Impact,sans-serif}
+.w{color:var(--win)}
+.game p{margin:8px 0 0}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+.tw{overflow-x:auto}
+th,td{padding:7px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:600;color:var(--mute)}
+td.n,th.n{text-align:right}
+tr.out td{color:var(--mute)}
+.cut td{border-bottom:3px solid var(--hazard)}
+.cc{display:grid;gap:14px}
+@media(min-width:640px){.cc{grid-template-columns:1fr 1fr}}
+.box{padding:16px;border:2px solid var(--ink)}
+.box h3{font:400 1.2rem/1.1 'Archivo Black',Impact,sans-serif;margin:0 0 8px}
+.box.clown{border-color:var(--blood)}
+.box.clown h3{color:var(--blood)}
+.obit{border:4px double var(--ink);background:var(--surface);padding:20px 18px;margin:14px 0}
+.obit h3{font:400 1.7rem/1.05 'Archivo Black',Impact,sans-serif;margin:0 0 2px;text-align:center}
+.obit .yrs{text-align:center;color:var(--mute);font-weight:600;margin:0 0 14px}
+.obit p{margin:0 0 10px}
+.obit p:last-child{margin:0}
+.obit b.l{display:block;font-weight:600;color:var(--mute);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}
+.trade{background:var(--surface);border:2px solid var(--ink);padding:14px 16px;margin:14px 0}
+.trade h3{font:400 1.15rem/1.1 'Archivo Black',Impact,sans-serif;margin:0 0 10px}
+.trade .sides{display:grid;gap:8px;margin:0 0 10px}
+@media(min-width:640px){.trade .sides{grid-template-columns:1fr 1fr}}
+.trade .side{border-left:6px solid var(--hazard);padding:4px 10px}
+.trade .side b.l{display:block;font-weight:600;color:var(--mute);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.trade p{margin:0 0 8px}
+.trade p:last-child{margin:0}
+.grade{display:inline-block;font:400 1rem 'Archivo Black',Impact,sans-serif;background:var(--ink);color:var(--bg);padding:2px 10px;margin-right:6px}
+.prev li{margin:0 0 9px}
+ul{padding-left:20px;margin:0}
+.verdict{background:var(--ink);color:var(--bg);padding:20px;margin-top:14px}
+.verdict p{margin:0 0 12px}
+.verdict p:last-child{margin:0}
+footer{margin-top:40px;padding-top:16px;border-top:6px solid var(--hazard);color:var(--mute);font-size:.88rem}
+footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>The Weekly Grind</h1>
+<p class="sub">Week 10 Edition · Romito Dynasty Football · Hate mail goes in the trash</p>
+</header>
+
+<p class="lede">Four trades, six games, and one team that scored 61.02 points, sold its quarterback for a third-round pick and still has to show up next week.</p>
+<p>Week 10 was a goddamn flea market with a scoreboard. Picks got swapped, a 38-year-old quarterback got a new home, and Monkey Business finally got its dick wet for 190.22 points, which would be great news if the rest of the season hadn’t already left it for dead. The trade deadline is Week 11, so every one of you is about to start lying in the group chat. Let’s get into it.</p>
+
+<div class="box" style="margin:18px 0">
+<h3>Looking for Underachievers or REINSTATE DALE?</h3>
+<p style="margin:0">Both teams got new names. <b>Underachievers</b> now plays as <b>Fantasy Football Hospice</b>, and <b>REINSTATE DALE</b> now plays as <b>Papa B’s Rape Victim</b>. Same rosters, same records, same points. The names are different, the bad decisions are not. Anything from last week’s Grind still counts.</p>
+</div>
+
+<h2>The Week That Was</h2>
+<p class="kick">Final scores, plus whoever fucked up the lineup.</p>
+
+<div class="game bad">
+<div class="score"><span>Papa B’s Rape Victim <b>61.02</b></span><span><b class="w">190.22</b> Monkey Business</span></div>
+<p>A 129.2-point beatdown, the biggest blowout of the week, and the worst score in the league by 28.76. Christian McCaffrey went for 58.3, the highest score by any player in the league, and Patrick Mahomes added 49.42 and Isaiah Likely 38.2. That’s 145.92 points from three guys. The other six starters combined for 44.3, which is a number you’d expect from a man after a long night at the bus station. And Monkey Business still left 16.7 on the bench, including Kirk Cousins (19.38), who was sold to a new owner before the dust settled. Papa B’s was worse. Aaron Rodgers gave them 19.62, nearly a third of the score. The other eight starters averaged 5.2 apiece, like eight guys splitting a single, sad, lukewarm hot dog. Demarcus Robinson put up a zero, Tyler Allgeier a 1.4 and kicker Dominic Zvada a 2. Deshaun Watson put up 22.38 on the bench and Xavier Hutchinson 15.8. The best lineup was worth 88.18, and they’d still have lost by 100. Monkey Business is 2-8 and has now scored 1,384.2 points. Third-most in the league. Think about that while you jerk off to your tiebreakers.</p>
+</div>
+
+<div class="game bad">
+<div class="score"><span>DeBronn <b>212.46</b></span><span><b class="w">118.42</b> Contagious</span></div>
+<p>A 94.04-point shit-stomping and the high score of the week, at 212.46. Brock Purdy went for 49.66, Jahmyr Gibbs for 45.2 and George Pickens for 43.5, and that trio alone put up 138.36. The new owner benched Joe Burrow again, and this time Burrow’s 45.16 sat there looking pretty while Purdy beat him by 4.5, which means DeBronn is now one regret and one vindication into his career. Mark Andrews (20.2) rode the bench while Tyler Warren put up 3.4 at tight end. Whatever, he left 21.6 on the pine and won by 94. Contagious is the best team in the league on paper and put up a 3.02 from Drake Maye at QB while Jared Goff dropped 33.42 on the bench like a guy who got stood up at the bar. That’s a 30.4-point fuck-up. Jaxon Smith-Njigba went for 37.1 and was the only thing on that roster that resembled a man. Contagious left 46.6 points on the bench and got its dick stomped in a bike lane.</p>
+</div>
+
+<div class="game">
+<div class="score"><span>Sun Gods Galaxy <b class="w">155.9</b></span><span><b>123.54</b> The Old Man</span></div>
+<p>Sun Gods Galaxy won by 32.36 and didn’t have to try very hard. Amon-Ra St. Brown (31.8), Parker Washington (29.2) and James Cook III (27.7) did 88.7 points of the work, and kicker Cam Little scored 19, as many as Derrick Henry, which is two guys doing the same job for wildly different salaries. Bryce Young gave them 8.1 at QB and it didn’t matter. They only left 6.8 on the bench, the cleanest lineup in the league, which is a hell of a thing to say about a team that’s 5-5. The Old Man lost with Josh Allen (28.34) and Chase Brown (28.3) doing their jobs, and then started Devin Singletary for 0.3 while Alvin Kamara sat on the bench with 16.4. Last week I begged him to start Adonai Mitchell and he got a goose egg. This week Mitchell gave him 8.9, so naturally the rest of the lineup crapped the bed. The Old Man left 17.1 on the bench and is now 3-7.</p>
+</div>
+
+<div class="game">
+<div class="score"><span>Lone Star Ranger <b class="w">125.58</b></span><span><b>117.16</b> Bowers Castle</span></div>
+<p>Lone Star won by 8.42 and Dak Prescott did 44.42 of it, 35.4% of the whole score, while the other eight starters averaged 10.1 like eight guys pooling gas money. Harold Fannin Jr. (19.6) and Quinshon Judkins (16.1) helped, and Denzel Boston’s 2.6 and Corey Kiner’s 2.5 didn’t. Last week Bowers Castle hung 194.82 and wore the Crown. This week it scored 117.16, a 77.66-point drop, and Puka Nacua, who put up 35 last week, sat on the bench and scored a big fat zero. Ja’Marr Chase (38.1) and CeeDee Lamb (20.2) did their part, and Brock Bowers went for 4.8 at tight end and Tucker Kraft for 3.4. Cam Ward dropped 24.14 on the bench while Justin Herbert gave 16.26 at QB. Bowers left 16.88 on the bench, and Lone Star left 18.7, including Woody Marks (7.5), who’s about to be somebody else’s problem. Bowers Castle scores like a Lamborghini and wins like a golf cart with a flat.</p>
+</div>
+
+<div class="game">
+<div class="score"><span>Fantasy Football Hospice <b>107.44</b></span><span><b class="w">115.7</b> Bucky Charms</span></div>
+<p>Bucky Charms won by 8.26, and the loser handed it the game. Cam Skattebo went for 27.2 on the Hospice bench while Kyren Williams started for 5.2 and Jordan Mason for 5.9, and either swap alone flips the game. That’s a 21.3-to-22-point mistake served on a platter. Blake Corum (20.9) and Bhayshul Tuten (20.3) did what they were told, Garrett Wilson gave 15.6, and Michael Penix Jr. gave 12.34 at QB, which is what a mild sneeze looks like on a stat sheet. Hospice left 25.2 on the bench and lost by 8. Bucky Charms rode Chuba Hubbard (34.2) and Diggs (20.3), then started Jordan Love for 12.8 while C.J. Stroud put up 26.44 on the bench, a 13.64-point fuck-up that cost nothing and still reads like a confession. Greg Dulcich put up a zero at tight end. You can win with a zero at tight end if the other team’s gonna help you.</p>
+</div>
+
+<div class="game hot">
+<div class="score"><span>Cpajek <b>89.78</b></span><span><b class="w">95.56</b> All RBs on IR</span></div>
+<p>The closest game of the week at 5.78, and a perfect picture of two teams trying to fuck each other with a hand on the wrong end. All RBs on IR started Germie Bernard for 1 and Kimani Vidal for 3.4 while Deebo Samuel Sr. dropped 31.9 on the bench, and it still won. That’s 40 points on the pine, with a running back room that gave 17.1 in total from its two starters. Jayden Daniels (26.76) and George Kittle (16.4) carried the corpse. Cpajek was worse. Emmett Johnson (35.1), Jordyn Tyson (19), Omarion Hampton (17.5) and Aaron Jones Sr. (12.5) all sat on the bench while Jalen Coker gave 0.3 at WR and three different tight ends took up slots. Cpajek left 79 points on the pine and lost by 5.78. Its best lineup was 168.78, which would’ve been the third-highest score in the league. You can’t lose a game this winnable without trying.</p>
+</div>
+
+<h2>Standings Watch</h2>
+<p class="kick">Top six make the playoffs. The line is drawn below sixth.</p>
+<div class="tw"><table>
+<tr><th>#</th><th>Team</th><th class="n">W-L</th><th class="n">PF</th><th class="n">PA</th></tr>
+<tr><td>1</td><td>Contagious</td><td class="n">8-2</td><td class="n">1515.96</td><td class="n">1199.22</td></tr>
+<tr><td>2</td><td>DeBronn</td><td class="n">7-3</td><td class="n">1622.24</td><td class="n">1240.18</td></tr>
+<tr><td>3</td><td>Bucky Charms</td><td class="n">7-3</td><td class="n">1313.52</td><td class="n">1175.58</td></tr>
+<tr><td>4</td><td>All RBs on IR</td><td class="n">6-4</td><td class="n">1222.94</td><td class="n">1199.10</td></tr>
+<tr><td>5</td><td>Fantasy Football Hospice</td><td class="n">6-4</td><td class="n">1186.94</td><td class="n">1191.26</td></tr>
+<tr class="cut"><td>6</td><td>Bowers Castle</td><td class="n">5-5</td><td class="n">1356.04</td><td class="n">1381.42</td></tr>
+<tr class="out"><td>7</td><td>Sun Gods Galaxy</td><td class="n">5-5</td><td class="n">1258.90</td><td class="n">1330.88</td></tr>
+<tr class="out"><td>8</td><td>Lone Star Ranger</td><td class="n">5-5</td><td class="n">1150.60</td><td class="n">1297.88</td></tr>
+<tr class="out"><td>9</td><td>Cpajek</td><td class="n">4-6</td><td class="n">1150.64</td><td class="n">1212.36</td></tr>
+<tr class="out"><td>10</td><td>The Old Man</td><td class="n">3-7</td><td class="n">1128.64</td><td class="n">1239.96</td></tr>
+<tr class="out"><td>11</td><td>Monkey Business</td><td class="n">2-8</td><td class="n">1384.20</td><td class="n">1455.98</td></tr>
+<tr class="out"><td>12</td><td>Papa B’s Rape Victim</td><td class="n">2-8</td><td class="n">977.92</td><td class="n">1344.72</td></tr>
+</table></div>
+<ul style="margin-top:14px">
+<li><b>Contagious</b> is 8-2 and still first, even after getting buttfucked for 94 points by the league’s second-place team. It started Drake Maye for 3.02 and left 46.6 on the bench, the second-worst bench job of the week. The lead is real and the lineup is a prank.</li>
+<li><b>DeBronn</b> is 7-3 with 1622.24 points, 106.28 more than anyone else in the league. The records say second place. The points say the rest of you are playing for second place.</li>
+<li><b>Bucky Charms</b> is 7-3 and third, with a 13.64-point QB fuck-up that didn’t matter and the fifth-most points in the league. It’s winning like a guy who found a lottery ticket in the parking lot.</li>
+<li><b>All RBs on IR</b> and <b>Fantasy Football Hospice</b> are both 6-4. All RBs gets fourth on points, 1222.94 to 1186.94. Hospice is 6-4 with the eighth-most points in the league, which is the fantasy equivalent of a guy who’s never read the manual and keeps winning at poker.</li>
+<li><b>Bowers Castle</b> is 5-5 and holds the last playoff seed, ahead of Sun Gods Galaxy (1258.9 points) and Lone Star Ranger (1150.6), both 5-5. A team that scored 194.82 and 117.16 in consecutive weeks is guarding the door, holding a cup of piss.</li>
+<li><b>Monkey Business</b> is 2-8 with 1384.2 points, third-most in the league, and has given up 1455.98, the most in the league. <b>Papa B’s Rape Victim</b> is 2-8 and has the fewest points in the league at 977.92. They’re the two worst teams in the league, one with a great offense and no defense and one with neither.</li>
+</ul>
+
+<h2>The Crown &amp; The Clown</h2>
+<p class="kick">Hall of fame and hall of shame, one entry each.</p>
+<div class="cc">
+<div class="box"><h3>👑 The Crown: DeBronn</h3><p style="margin:0">212.46 points, the high score of the week, and a 94.04-point win over the first-place team. Purdy, Gibbs and Pickens went for 138.36 together, and Burrow’s 45.16 never even left the bench. DeBronn is 7-3, leads the league with 1622.24 points and still left Mark Andrews (20.2) sitting. Two weeks in, he’s 2-0 and nobody knows what he’s doing, including him. Savor it.</p></div>
+<div class="box clown"><h3>🤡 The Clown: Cpajek</h3><p style="margin:0">89.78 points, the second-lowest score of the week, and a 5.78-point loss that was lost in the lineup. Cpajek left 79 points on the bench, Emmett Johnson (35.1), Jordyn Tyson (19), Omarion Hampton (17.5) and Aaron Jones Sr. (12.5) among them, while three tight ends and a 0.3 at WR took the field. The best lineup was worth 168.78. Now 4-6 and one game out of the last playoff spot. That wasn’t a lineup, that was a fucking cry for help.</p></div>
+</div>
+
+<h2>The Trade Wire</h2>
+<p class="kick">Four trades, one weekend, and the trade deadline is Week 11. Grades are mine and final.</p>
+
+<div class="trade">
+<h3>Trade 1: The Geriatric Special</h3>
+<div class="sides">
+<div class="side"><b class="l">Contagious gets</b>Kirk Cousins</div>
+<div class="side"><b class="l">Monkey Business gets</b>2027 2nd-round pick (from Bucky Charms)</div>
+</div>
+<p><span class="grade">C+</span>Contagious just played Drake Maye for 3.02 at QB with Jared Goff (33.42) and Kyler Murray on the roster, and its answer was to go out and buy a fourth quarterback. Cousins is 38 and scored 19.38 on Monkey Business’s bench, so he’d have had the second-best QB game on Contagious. Monkey Business gets a second-round pick for a quarterback it wasn’t starting, which is fine, because the team is 2-8 and starting Mahomes. Contagious is 8-2 and the QB room looks like a retirement home with a depth chart.</p>
+</div>
+
+<div class="trade">
+<h3>Trade 2: The Jeremiah Smith Gambit</h3>
+<div class="sides">
+<div class="side"><b class="l">Sun Gods Galaxy gets</b>Blake Corum, Kenneth Walker III</div>
+<div class="side"><b class="l">Hospice gets</b>Oronde Gadsden, 2027 1st-round pick (from Papa B’s Rape Victim)</div>
+</div>
+<p><span class="grade">B</span>Hospice sold Corum, who scored 20.9 for it this week, and Walker, who’s listed as Out, for a tight end who put up 2.2 on the Sun Gods bench and a first-round pick belonging to the league’s lowest-scoring team. The plan: land high enough in next year’s rookie draft to take Jeremiah Smith. Papa B’s is 2-8 with 977.92 points, so that pick should land high on the board. Sun Gods Galaxy gets two running backs for the playoff push, one of whom is hurt, and dropped Samaje Perine (13.9 this week) and Elijah Mitchell on Tuesday morning. Dynasty brain versus win-now brain, and the dynasty brain is wearing the nicer shoes.</p>
+</div>
+
+<div class="trade">
+<h3>Trade 3: Papa B’s Goes Out of Business</h3>
+<div class="sides">
+<div class="side"><b class="l">Hospice gets</b>Aaron Rodgers</div>
+<div class="side"><b class="l">Papa B’s Rape Victim gets</b>2028 3rd-round pick (from Hospice)</div>
+</div>
+<p><span class="grade">B+</span>Rodgers scored 19.62 for Papa B’s, a third of its entire score, and the team sold him for a third-round pick two years from now. That’s the fantasy equivalent of selling your kidney to buy a lottery ticket you can’t cash until 2028. Hospice’s QB room is Michael Penix Jr. (12.34), Baker Mayfield (Questionable), Sam Darnold (Out) and Jalen Hurts (IR), so a guy who gave 19.62 in a 61.02 team is a pretty goddamn good fix. Hospice finally has a quarterback.</p>
+</div>
+
+<div class="trade">
+<h3>Trade 4: Kyren Gets Shipped</h3>
+<div class="sides">
+<div class="side"><b class="l">Lone Star Ranger gets</b>Kyren Williams</div>
+<div class="side"><b class="l">Hospice gets</b>Woody Marks, 2027 1st-round pick (from All RBs on IR)</div>
+</div>
+<p><span class="grade">A-</span>Hospice sold a running back who scored 5.2 for a running back who scored 7.5 on Lone Star’s bench plus a first-round pick. Lone Star Ranger held three 2027 firsts, gave one up, and now has a running back who might actually score. Hospice has now picked up two extra 2027 firsts, a fresh quarterback and a handful of running backs, which is either a plan or a very expensive panic attack. Either way, the deadline is Week 11, so anyone still sitting on a pick has until then to call.</p>
+</div>
+
+<h2>Obituary</h2>
+<p class="kick">One team is dead. The rest of you are on notice.</p>
+<div class="obit">
+<h3>PAPA B’S RAPE VICTIM</h3>
+<p class="yrs">Draft Day – Week 10, 2026 · formerly known as REINSTATE DALE and WELL WELL WELL</p>
+<p>PAPA B’S RAPE VICTIM, 2-8, died on Sunday for the second time in two weeks, which is a franchise record for a team that was supposed to stay dead. It scored 61.02 points, the lowest in the league by 28.76, and lost to Monkey Business by 129.2, the biggest blowout of the week. That’s 6.8 points per starter, a number you’d be ashamed to get from a dying man’s handjob. The body was then sold off for parts: Aaron Rodgers went out the door for a 2028 third-round pick, and its own 2027 first is already in someone else’s pocket. The only organ donor in the league with a roster.</p>
+<p><b class="l">Cause of death</b>Demarcus Robinson at WR: 0. Tyler Allgeier: 1.4. Dominic Zvada at kicker: 2. Colby Parkinson: 4.1. Wan’Dale Robinson: 4. Rodgers did 19.62 of the 61.02 and the other eight starters averaged 5.2. Meanwhile Deshaun Watson put up 22.38 on the bench. The best lineup was worth 88.18, and they still would’ve lost by a hundred. Somebody tell the coroner it was a lineup.</p>
+<p><b class="l">Survived by</b>Deshaun Watson (22.38, bench), Xavier Hutchinson (15.8, bench), Kyle McCord (12.76, bench), Jerry Jeudy (10.4, bench) and Rodgers, who’s moving to a new house with a new owner and a better view. All watched the funeral from the nosebleeds with a lukewarm beer.</p>
+<p><b class="l">Last words</b>“Dale would’ve started Watson.” (Satire. Allegedly.)</p>
+<p><b class="l">Services</b>Week 11 at Sun Gods Galaxy, a 5-5 team that just scored 155.9 and has two new running backs. Bring a shovel. Bring two. Bring a third for the guy who trades the next first-round pick.</p>
+<p><b class="l">Also found at the scene</b>The Old Man (123.54, 3-7), which started Devin Singletary for 0.3 with Alvin Kamara’s 16.4 on the bench, and Monkey Business (190.22, 2-8), which won by 129 and is still 2-8, a corpse that looks great in the casket.</p>
+</div>
+
+<h2>Next Week’s Preview</h2>
+<p class="kick">Week 11. Trade deadline is this week, so start lying to each other now.</p>
+<ul class="prev">
+<li><b>Fantasy Football Hospice vs Bowers Castle:</b> 6-4 against 5-5, fifth against sixth. Hospice just stacked first-round picks and a quarterback and needs a lineup that sets itself. Bowers Castle scored 194.82 and 117.16 in consecutive weeks, so pick a number.</li>
+<li><b>Lone Star Ranger vs Bucky Charms:</b> 5-5 against 7-3. Lone Star has Dak and Kyren Williams, if the paperwork clears. Bucky Charms just started a 12.8 over a 26.44 and won anyway, and it’s due for karma to come knock.</li>
+<li><b>Sun Gods Galaxy vs Papa B’s Rape Victim:</b> 5-5 against 2-8. Sun Gods put up 155.9 and dropped two running backs for two more. Papa B’s put up 61.02 and sold the quarterback. This is a lamb walking into a butcher shop with a bib on.</li>
+<li><b>Monkey Business vs The Old Man:</b> 2-8 against 3-7. A team with the third-most points in the league and a loss column that’s a war crime against a team that started Singletary for 0.3. One of these men is going to win and nobody’s going to care.</li>
+<li><b>DeBronn vs Cpajek:</b> 7-3 against 4-6. 1622.24 points against a lineup that left 79 on the bench. This is a fight between a Ferrari and a guy who thought the Ferrari was a toaster.</li>
+<li><b>Contagious vs All RBs on IR:</b> 8-2 against 6-4. First place with four quarterbacks and a 3.02 against a team that left 40 points on the bench and won. Somebody’s getting set up and somebody’s getting set free. Bring a mop.</li>
+</ul>
+
+<h2>Commissioner’s Verdict</h2>
+<div class="verdict">
+<p>Week 10 taught us that picks are the new currency and nobody here can set a lineup. Cpajek left 79 points on the bench, Contagious 46.6, All RBs on IR 40, Bucky Charms 34.74, Papa B’s Rape Victim 27.16 and Hospice 25.2. Four of those six lost. The lesson: you can spend a first-round pick and still not figure out where your best running back is.</p>
+<p>DeBronn is 7-3, leads the league in points and benched Joe Burrow for the second week in a row. This time it worked. Contagious is 8-2 and doesn’t know who its quarterback is. Hospice is 6-4 and holding more 2027 first-round picks than the nice guy at the pawn shop.</p>
+<p>Papa B’s Rape Victim is dead, again. Cause of death: a lineup, a trade and a really weird week. The paperwork’s still in the mail.</p>
+<p>Check your lineups before kickoff, you degenerates. The deadline is Week 11, so anyone who wants to make a deal has about seven days to be an idiot about it. Next week’s Grind will be meaner, and I’ll be bringing lube.</p>
+</div>
+
+<footer>
+<p><b>The Weekly Grind HQ</b> · Romito Dynasty Football · Scores final as of Week 10, via Sleeper. Bench points are my math from final lineups. Any resemblance to competent roster management is purely coincidental.</p>
+</footer>
+</div>
+</body>
+</html></template>
 
   <!-- WEEK 9 FULL VERBATIM TEMPLATE -->
   <template id="tpl-week-9"><!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -713,11 +939,14 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           <div onclick="switchTab('chronicles')" class="flex items-center gap-2.5 cursor-pointer shrink-0">
             <img id="league-avatar" src="https://placehold.co/40x40/f59e0b/090d16?text=RD" alt="League Logo" class="w-10 h-10 rounded-xl border border-amber-500/40 object-cover shadow" />
             <div class="min-w-0">
-              <h1 id="league-name" class="font-extrabold text-base sm:text-lg tracking-tight text-white truncate">ROMITO DYNASTY FOOTBALL</h1>
+              <h1 id="league-name" class="font-display text-base sm:text-lg tracking-tight text-white truncate">ROMITO DYNASTY FOOTBALL</h1>
               <div class="flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="font-bold text-amber-400/90 hidden md:inline">THE WEEKLY GRIND • LIVE HUB</span>
+                <span class="font-bold text-amber-400/90 hidden md:inline">THE WEEKLY GRIND HQ</span>
                 <span id="sync-badge" class="inline-flex items-center gap-1 text-emerald-400 font-medium">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Sleeper Sync
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Sync
+                </span>
+                <span id="cloud-badge" class="inline-flex items-center gap-1 text-sky-400 font-medium hidden sm:inline-flex">
+                  <i class="fa-solid fa-cloud text-[10px]"></i> Cloud
                 </span>
               </div>
             </div>
@@ -741,7 +970,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             🏈 Weekly Matchups
           </button>
           <button onclick="switchTab('sportsbook')" id="nav-sportsbook" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
-            🎰 League Sportsbook
+            🎰 Sportsbook & Leaderboard
           </button>
         </nav>
 
@@ -751,12 +980,12 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             <i class="fa-solid fa-wallet text-amber-400 text-xs"></i>
             <div class="text-left leading-tight">
               <div id="header-bettor-name" class="text-[10px] text-slate-400 max-w-[85px] truncate">Guest Bettor</div>
-              <div id="header-bankroll" class="text-xs sm:text-sm font-extrabold text-emerald-400">$100.00</div>
+              <div id="header-bankroll" class="text-xs sm:text-sm font-mono font-extrabold text-emerald-400">$100.00</div>
             </div>
           </button>
           <button onclick="fetchAllSleeperData(true)" title="Sync Sleeper" class="px-2.5 py-2 rounded-xl bg-slate-850 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-amber-400 transition text-xs font-bold flex items-center gap-1.5">
             <i id="refresh-icon" class="fa-solid fa-rotate"></i>
-            <span class="hidden sm:inline">Sync Sleeper</span>
+            <span class="hidden sm:inline">Sync</span>
           </button>
         </div>
       </div>
@@ -766,7 +995,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         <button onclick="switchTab('chronicles')" id="mnav-chronicles" class="mnav-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-amber-500 text-slate-950">📰 Weekly Chronicles</button>
         <button onclick="switchTab('standings')" id="mnav-standings" class="mnav-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-300">🏆 Live Standings</button>
         <button onclick="switchTab('matchups')" id="mnav-matchups" class="mnav-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-300">🏈 Weekly Matchups</button>
-        <button onclick="switchTab('sportsbook')" id="mnav-sportsbook" class="mnav-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-300">🎰 League Sportsbook</button>
+        <button onclick="switchTab('sportsbook')" id="mnav-sportsbook" class="mnav-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-300">🎰 Sportsbook & Leaderboard</button>
       </div>
     </div>
   </header>
@@ -777,14 +1006,14 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
     <!-- ========================================================= -->
-    <!-- TAB 1: WEEKLY CHRONICLES (FULL VERBATIM WEEKS 6–9)        -->
+    <!-- TAB 1: WEEKLY CHRONICLES (FULL VERBATIM WEEKS 6–10)       -->
     <!-- ========================================================= -->
     <section id="tab-chronicles" class="tab-panel space-y-5">
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
         <div>
-          <span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-400">Official League Gazette • Weeks 6–9</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">The Weekly Grind — Complete Newsletter Archive</h2>
-          <p class="text-xs text-slate-400 mt-0.5">Full, unedited HTML editions preserved verbatim with original styling, tables, obituaries, and verdicts.</p>
+          <span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-400">Official League Gazette • Full Archive</span>
+          <h2 class="text-xl sm:text-2xl font-display text-white tracking-tight">THE WEEKLY GRIND — NEWSLETTER ARCHIVE</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Complete, unedited HTML editions preserved verbatim with original styling, tables, trade grades, and obituaries.</p>
         </div>
 
         <!-- Issue Switcher Pills -->
@@ -812,8 +1041,8 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     <section id="tab-standings" class="tab-panel hidden space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 class="text-2xl font-extrabold tracking-tight">Live League Standings</h2>
-          <p class="text-sm text-slate-400">Real-time records, scoring averages, and Top-6 playoff cutline synced directly from Sleeper (<code class="text-amber-400">1312138307311771648</code>).</p>
+          <h2 class="text-2xl font-display tracking-tight">LIVE LEAGUE STANDINGS</h2>
+          <p class="text-sm text-slate-400">Real-time records, scoring averages, and Top-6 playoff cutline synced directly from Sleeper (<code class="text-amber-400 font-mono">1312138307311771648</code>).</p>
         </div>
         <div class="flex items-center gap-2 text-xs">
           <span class="px-3 py-1.5 rounded-xl bg-slate-900 border border-amber-500/40 text-slate-200">
@@ -846,13 +1075,13 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     </section>
 
     <!-- ========================================================= -->
-    <!-- TAB 3: WEEKLY MATCHUPS WITH LIVE PROJECTIONS              -->
+    <!-- TAB 3: WEEKLY MATCHUPS WITH EXACT SLEEPER PROJECTIONS     -->
     <!-- ========================================================= -->
     <section id="tab-matchups" class="tab-panel hidden space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-2xl">
         <div>
-          <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">Weekly Matchups & Live Projections</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Head-to-head actual scores alongside projected starter point totals and win probability meters.</p>
+          <h2 class="text-xl sm:text-2xl font-display tracking-tight">WEEKLY MATCHUPS & SLEEPER PROJECTIONS</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Head-to-head actual scores alongside exact starter projections calculated using your league's custom Sleeper scoring rules.</p>
         </div>
         <div class="flex items-center gap-2">
           <label for="matchup-week-select" class="text-xs font-bold text-slate-400 uppercase">Week:</label>
@@ -863,7 +1092,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       </div>
 
       <div id="matchups-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div class="col-span-full py-12 text-center text-slate-400">Loading matchups and projections...</div>
+        <div class="col-span-full py-12 text-center text-slate-400">Loading matchups and exact Sleeper projections...</div>
       </div>
     </section>
 
@@ -876,10 +1105,10 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         <div class="space-y-1">
           <div class="flex items-center gap-2">
             <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[10px] font-extrabold uppercase tracking-wider">Romito Sportsbook</span>
-            <span id="bettor-status-badge" class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">Solvent</span>
+            <span id="bettor-status-badge" class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">In the Black</span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-white">Live Matchup Lines, Parlays & Futures</h2>
-          <p class="text-xs text-slate-400">Everyone starts at <strong class="text-white">$100.00</strong>. Keep betting even if your balance drops into the negatives—debt builds character.</p>
+          <h2 class="text-xl sm:text-2xl font-display text-white">LIVE MATCHUP LINES, PARLAYS & FUTURES</h2>
+          <p class="text-xs text-slate-400">Everyone starts at <strong class="text-white font-mono">$100.00</strong>. Keep betting even if your balance drops deep into the negatives—cloud-synced across devices.</p>
         </div>
 
         <!-- Bettor Selector + Live Bankroll Card -->
@@ -893,7 +1122,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           <div class="h-9 w-px bg-slate-800 hidden sm:block"></div>
           <div class="px-2">
             <div class="text-[10px] font-bold uppercase text-slate-400">Simulated Bankroll</div>
-            <div id="sb-bankroll-display" class="text-xl sm:text-2xl font-black text-emerald-400">$100.00</div>
+            <div id="sb-bankroll-display" class="text-xl sm:text-2xl font-mono font-black text-emerald-400">$100.00</div>
           </div>
         </div>
       </div>
@@ -902,9 +1131,9 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         <!-- Left 2 Columns: Unique Matchup Lines & Championship Futures -->
         <div class="lg:col-span-2 space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <h3 class="font-extrabold text-lg flex items-center gap-2">
+            <h3 class="font-display text-lg flex items-center gap-2">
               <i class="fa-solid fa-fire text-amber-500"></i>
-              <span id="sb-week-title">Week 10 Matchup Odds</span>
+              <span id="sb-week-title">WEEK 11 MATCHUP ODDS</span>
             </h3>
             <div class="flex items-center gap-2">
               <span class="text-xs text-slate-400">Board Week:</span>
@@ -916,14 +1145,14 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
 
           <!-- Dynamic Matchup Odds Cards -->
           <div id="sb-matchups-list" class="space-y-4">
-            <div class="py-10 text-center text-slate-400 text-sm">Calculating unique matchup spreads and moneylines...</div>
+            <div class="py-10 text-center text-slate-400 text-sm">Calculating matchup spreads and moneylines from live projections...</div>
           </div>
 
           <!-- Championship Futures Board -->
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
               <div>
-                <h3 class="font-extrabold text-base text-white">2026 Romito Dynasty Championship Futures</h3>
+                <h3 class="font-display text-base text-white">2026 ROMITO DYNASTY CHAMPIONSHIP FUTURES</h3>
                 <p class="text-xs text-slate-400">Tap any team's odds to add a futures leg to your slip.</p>
               </div>
               <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
@@ -939,9 +1168,9 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           <!-- Bet Slip -->
           <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-5 shadow-2xl space-y-4">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 class="font-extrabold text-base flex items-center gap-2">
+              <h3 class="font-display text-base flex items-center gap-2">
                 <i class="fa-solid fa-ticket text-amber-400"></i>
-                <span>Bet Slip (<span id="slip-count">0</span>)</span>
+                <span>BET SLIP (<span id="slip-count">0</span>)</span>
               </h3>
               <button onclick="clearSlip()" class="text-xs text-slate-400 hover:text-rose-400 font-semibold">Clear</button>
             </div>
@@ -959,7 +1188,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             <div id="slip-checkout" class="hidden pt-3 border-t border-slate-800 space-y-3">
               <div class="flex items-center justify-between text-xs">
                 <span class="text-slate-400" id="slip-odds-label">Combined Odds:</span>
-                <span id="slip-combined-odds" class="font-extrabold text-amber-400 text-sm">-110</span>
+                <span id="slip-combined-odds" class="font-mono font-extrabold text-amber-400 text-sm">-110</span>
               </div>
               <div>
                 <div class="flex justify-between text-xs mb-1">
@@ -967,15 +1196,15 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                   <span class="text-[11px] text-amber-400/80">Negative balances allowed</span>
                 </div>
                 <div class="flex gap-2">
-                  <input type="number" id="wager-input" value="25" min="1" step="5" oninput="updateSlipSummary()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white focus:outline-none focus:border-amber-500" />
-                  <button onclick="setQuickWager(25)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-bold">$25</button>
-                  <button onclick="setQuickWager(50)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-bold">$50</button>
-                  <button onclick="setQuickWager(100)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-bold">$100</button>
+                  <input type="number" id="wager-input" value="25" min="1" step="5" oninput="updateSlipSummary()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm font-mono font-bold text-white focus:outline-none focus:border-amber-500" />
+                  <button onclick="setQuickWager(25)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-mono font-bold">$25</button>
+                  <button onclick="setQuickWager(50)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-mono font-bold">$50</button>
+                  <button onclick="setQuickWager(100)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-mono font-bold">$100</button>
                 </div>
               </div>
               <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-                <span class="text-slate-400">Potential Payout (Profit + Stake):</span>
-                <span id="slip-total-return" class="font-black text-emerald-400 text-base">$47.73</span>
+                <span class="text-slate-400">Potential Return (Profit + Stake):</span>
+                <span id="slip-total-return" class="font-mono font-black text-emerald-400 text-base">$47.73</span>
               </div>
               <button onclick="submitWager()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-lg shadow-amber-500/20 transition">
                 Place Bet Now
@@ -986,10 +1215,10 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           <!-- League Bankroll Leaderboard -->
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
             <div class="flex items-center justify-between">
-              <h3 class="font-extrabold text-sm uppercase tracking-wider text-slate-300">Bankroll Leaderboard</h3>
-              <span class="text-[11px] text-slate-500">Starts at $100</span>
+              <h3 class="font-display text-sm uppercase tracking-wider text-slate-300">BANKROLL LEADERBOARD</h3>
+              <span class="text-[11px] text-slate-500 font-mono">Start: $100</span>
             </div>
-            <div id="bankroll-leaderboard" class="space-y-2 max-h-[260px] overflow-y-auto custom-scrollbar">
+            <div id="bankroll-leaderboard" class="space-y-2 max-h-[280px] overflow-y-auto custom-scrollbar">
               <!-- Populated dynamically -->
             </div>
           </div>
@@ -997,7 +1226,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           <!-- Active & Settled Tickets for Selected Bettor -->
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
             <div class="flex items-center justify-between">
-              <h3 class="font-extrabold text-sm uppercase tracking-wider text-slate-300">Ticket History</h3>
+              <h3 class="font-display text-sm uppercase tracking-wider text-slate-300">TICKET HISTORY</h3>
               <button onclick="autoGradeCompletedTickets()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-amber-400 px-2.5 py-1 rounded-lg font-bold transition">
                 Auto-Grade Final
               </button>
@@ -1013,7 +1242,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
 
   <!-- FOOTER -->
   <footer class="border-t border-slate-800 bg-slate-900/60 py-5 text-center text-xs text-slate-500">
-    Romito Dynasty Football Hub • Live Sleeper League ID <span class="text-slate-300 font-semibold">1312138307311771648</span> • Fake Money, Real Shame
+    The Weekly Grind HQ · Romito Dynasty Football · Live Sleeper League ID <span class="text-slate-300 font-mono font-semibold">1312138307311771648</span> • Fake Money, Real Shame
   </footer>
 
   <!-- ===================================================================== -->
@@ -1028,8 +1257,8 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             <i class="fa-solid fa-shield-halved"></i>
           </div>
           <div>
-            <h3 class="font-extrabold text-base text-white">Commissioner Admin Studio</h3>
-            <p class="text-[11px] text-slate-400">Passcode Protected • League 1312138307311771648</p>
+            <h3 class="font-display text-base text-white">COMMISSIONER ADMIN STUDIO</h3>
+            <p class="text-[11px] text-slate-400">Passcode Protected • Cloud Synced • League 1312138307311771648</p>
           </div>
         </div>
         <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white p-1.5">
@@ -1046,9 +1275,9 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           </div>
           <div>
             <h4 class="font-bold text-lg text-white">Enter Commissioner Passcode</h4>
-            <p class="text-xs text-slate-400 mt-1">Enter passcode <strong class="text-slate-300">8826</strong> to publish weekly newsletters or manage sportsbook tickets.</p>
+            <p class="text-xs text-slate-400 mt-1">Enter passcode <strong class="text-slate-300 font-mono">8826</strong> to publish weekly newsletters or manage sportsbook tickets.</p>
           </div>
-          <input type="password" id="admin-code-input" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter') unlockAdminStudio()" class="w-44 mx-auto block bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-center text-2xl font-black tracking-[0.4em] text-amber-400 focus:outline-none focus:border-amber-500" />
+          <input type="password" id="admin-code-input" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter') unlockAdminStudio()" class="w-44 mx-auto block bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-center text-2xl font-mono font-black tracking-[0.4em] text-amber-400 focus:outline-none focus:border-amber-500" />
           <p id="admin-code-error" class="text-xs text-rose-400 font-semibold hidden">Invalid passcode. Access denied.</p>
           <button onclick="unlockAdminStudio()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm transition shadow-lg shadow-amber-500/20">
             Unlock Admin Studio
@@ -1067,18 +1296,23 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                 <i class="fa-solid fa-plus-circle"></i>
                 <span>+ Publish New Weekly Chronicle (Raw HTML)</span>
               </h4>
-              <span class="text-[11px] text-slate-400">Paste full HTML from Claude</span>
+              <span class="text-[11px] text-sky-400 font-semibold"><i class="fa-solid fa-cloud mr-1"></i>Saves Permanently</span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Week Number</label>
-                <input type="number" id="new-week-num" value="10" min="1" max="18" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white" />
+                <input type="number" id="new-week-num" value="11" min="1" max="18" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-mono font-bold text-white" />
               </div>
               <div class="sm:col-span-2">
                 <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Edition Title</label>
-                <input type="text" id="new-week-title" placeholder="e.g., The Weekly Grind — Week 10" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white" />
+                <input type="text" id="new-week-title" placeholder="e.g., Week 11 — Trade Deadline Fallout" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white" />
               </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Subtitle / Deck (Optional)</label>
+              <input type="text" id="new-week-subtitle" placeholder="e.g., Romito Dynasty Football · Hate mail goes in the trash" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200" />
             </div>
 
             <div>
@@ -1087,7 +1321,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             </div>
 
             <button onclick="publishNewChronicle()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm shadow-lg shadow-amber-500/20 transition">
-              Publish New Week to Chronicles
+              Publish & Save to Cloud Chronicles
             </button>
           </div>
 
@@ -1096,7 +1330,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             <div class="flex items-center justify-between">
               <h4 class="font-extrabold text-sm uppercase tracking-wider text-slate-300">Manage / Edit Existing Weeks</h4>
               <button onclick="exportPermanentHtml()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold transition">
-                <i class="fa-solid fa-copy mr-1"></i>Export Permanent Code
+                <i class="fa-solid fa-copy mr-1"></i>Export HTML Backup
               </button>
             </div>
             <div id="admin-weeks-list" class="space-y-2">
@@ -1112,25 +1346,37 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
               <input type="text" id="edit-week-title" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white" />
               <textarea id="edit-week-html" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-200"></textarea>
               <button onclick="saveEditedWeek()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs">
-                Save Changes
+                Save Changes to Cloud
               </button>
             </div>
 
             <!-- Export Output Box -->
             <div id="admin-export-box" class="hidden pt-3 border-t border-slate-800 space-y-2">
-              <p class="text-[11px] text-slate-400">Copy this archive bundle and paste it in chat anytime you want new weeks permanently baked into the codebase:</p>
+              <p class="text-[11px] text-slate-400">Full JSON archive backup copied to clipboard:</p>
               <textarea id="admin-export-textarea" rows="4" readonly class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-[11px] font-mono text-amber-300"></textarea>
             </div>
           </div>
 
           <!-- CARD 3: SPORTSBOOK SETTLEMENT & BANKROLL CONTROLS -->
-          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-4">
             <div class="flex items-center justify-between">
               <h4 class="font-extrabold text-sm uppercase tracking-wider text-slate-300">Sportsbook Bet Settlement & Bankrolls</h4>
               <button onclick="resetAllBankrolls()" class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 text-xs font-bold">
                 Reset All to $100
               </button>
             </div>
+
+            <!-- Manual Bankroll Adjustment Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-900 p-3 rounded-xl border border-slate-800">
+              <select id="admin-adj-bettor" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-bold text-white">
+                <option value="Guest Bettor">Guest Bettor</option>
+              </select>
+              <input type="number" id="admin-adj-amount" step="5" placeholder="New Balance ($)" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-amber-400" />
+              <button onclick="adminSetExactBankroll()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs rounded-lg py-1.5 px-3">
+                Set Bankroll
+              </button>
+            </div>
+
             <div id="admin-tickets-queue" class="space-y-2 max-h-[220px] overflow-y-auto custom-scrollbar">
               <!-- Pending tickets for manual Win/Loss/Push settlement -->
             </div>
@@ -1141,67 +1387,188 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
   </div>
 
   <!-- ===================================================================== -->
-  <!-- SAFE, SELF-CONTAINED APPLICATION JAVASCRIPT                           -->
+  <!-- FIREBASE CLOUD PERSISTENCE & LIVE SLEEPER ENGINE                      -->
   <!-- ===================================================================== -->
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
     const SLEEPER_LEAGUE_ID = '1312138307311771648';
     const ADMIN_PASSCODE = '8826';
-    const STORAGE_KEY_ARTICLES = 'romito_dynasty_articles_v4';
-    const STORAGE_KEY_BANKROLLS = 'romito_dynasty_bankrolls_v4';
-    const STORAGE_KEY_TICKETS = 'romito_dynasty_tickets_v4';
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'romito-dynasty-hub';
 
-    // Global State
-    let state = {
+    let db = null;
+    let auth = null;
+    let currentUser = null;
+    let firestoreReady = false;
+
+    // Global App State
+    const state = {
       league: null,
+      scoringSettings: null,
       users: [],
       rosters: [],
-      teams: [], // Merged roster + user info + power metrics
-      currentNflWeek: 10,
-      selectedMatchupWeek: 10,
-      selectedSportsbookWeek: 10,
+      teams: [],
+      currentNflSeason: '2026',
+      currentNflWeek: 11,
+      selectedMatchupWeek: 11,
+      selectedSportsbookWeek: 11,
       matchupsCache: {},
-      playersCache: null,
+      projectionsCache: {},
+      builtInArticles: [],
+      cloudArticles: {},
       articles: [],
-      activeArticleWeek: 9,
+      activeArticleWeek: 10,
       editingWeekNum: null,
       adminUnlocked: false,
       activeBettor: 'Guest Bettor',
-      bankrolls: { 'Guest Bettor': 100 },
+      bankrolls: { 'Guest Bettor': 100.0 },
       tickets: [],
       slip: [],
       slipMode: 'single'
     };
 
-    // Safe LocalStorage Helpers
-    function safeLoadJSON(key, fallback) {
+    // =====================================================================
+    // FIREBASE INITIALIZATION (STRICT PATHS & AUTH-FIRST GUARD)
+    // =====================================================================
+    async function initCloudPersistence() {
       try {
-        const raw = localStorage.getItem(key);
-        if (!raw) return fallback;
-        const parsed = JSON.parse(raw);
-        return parsed !== null && parsed !== undefined ? parsed : fallback;
-      } catch (e) {
-        try { localStorage.removeItem(key); } catch (_) {}
-        return fallback;
+        if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+          updateCloudStatus('Local Only', false);
+          return;
+        }
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
+
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        onAuthStateChanged(auth, (user) => {
+          currentUser = user;
+          if (user && db) {
+            firestoreReady = true;
+            updateCloudStatus('Cloud Synced', true);
+            attachFirestoreListeners();
+          }
+        });
+      } catch (err) {
+        console.warn('Cloud initialization fallback:', err);
+        updateCloudStatus('Local Mode', false);
       }
     }
 
-    function safeSaveJSON(key, value) {
-      try {
-        localStorage.setItem(key, JSON.stringify(value));
-      } catch (e) {
-        console.warn('Storage write skipped:', e);
-      }
+    function updateCloudStatus(text, ok) {
+      const el = document.getElementById('cloud-badge');
+      if (!el) return;
+      el.className = `inline-flex items-center gap-1 font-medium hidden sm:inline-flex ${ok ? 'text-sky-400' : 'text-slate-500'}`;
+      el.innerHTML = `<i class="fa-solid fa-cloud text-[10px]"></i> ${text}`;
     }
 
-    // Load default verbatim newsletters safely from <template> tags
-    function getBuiltInArticles() {
+    function attachFirestoreListeners() {
+      if (!currentUser || !db) return;
+
+      // 1. Public Chronicles Collection: /artifacts/{appId}/public/data/chronicles
+      const chroniclesCol = collection(db, 'artifacts', appId, 'public', 'data', 'chronicles');
+      onSnapshot(chroniclesCol, (snap) => {
+        const nextCloud = {};
+        snap.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data && data.week && data.html) {
+            nextCloud[Number(data.week)] = {
+              week: Number(data.week),
+              title: data.title || `The Weekly Grind — Week ${data.week}`,
+              subtitle: data.subtitle || '',
+              html: data.html,
+              isCloud: true
+            };
+          }
+        });
+        state.cloudArticles = nextCloud;
+        rebuildMergedArticles();
+      }, (err) => console.error('Chronicles snapshot error:', err));
+
+      // 2. Public Bankrolls Collection: /artifacts/{appId}/public/data/bankrolls
+      const bankrollsCol = collection(db, 'artifacts', appId, 'public', 'data', 'bankrolls');
+      onSnapshot(bankrollsCol, (snap) => {
+        let changed = false;
+        snap.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data && data.name !== undefined && data.balance !== undefined) {
+            state.bankrolls[data.name] = Number(data.balance);
+            changed = true;
+          }
+        });
+        if (changed) updateBankrollUI();
+      }, (err) => console.error('Bankrolls snapshot error:', err));
+
+      // 3. Public Tickets Collection: /artifacts/{appId}/public/data/tickets
+      const ticketsCol = collection(db, 'artifacts', appId, 'public', 'data', 'tickets');
+      onSnapshot(ticketsCol, (snap) => {
+        const loaded = [];
+        snap.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data && data.id) loaded.push(data);
+        });
+        loaded.sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+        state.tickets = loaded;
+        renderBettorTickets();
+        if (state.adminUnlocked) renderAdminTicketsQueue();
+      }, (err) => console.error('Tickets snapshot error:', err));
+    }
+
+    async function cloudSaveChronicle(articleObj) {
+      if (!currentUser || !db || !firestoreReady) return;
+      const ref = doc(db, 'artifacts', appId, 'public', 'data', 'chronicles', `week_${articleObj.week}`);
+      await setDoc(ref, {
+        week: Number(articleObj.week),
+        title: articleObj.title,
+        subtitle: articleObj.subtitle || '',
+        html: articleObj.html,
+        updatedAt: Date.now()
+      });
+    }
+
+    async function cloudDeleteChronicle(weekNum) {
+      if (!currentUser || !db || !firestoreReady) return;
+      const ref = doc(db, 'artifacts', appId, 'public', 'data', 'chronicles', `week_${weekNum}`);
+      await deleteDoc(ref);
+    }
+
+    async function cloudSaveBankroll(name, balance) {
+      if (!currentUser || !db || !firestoreReady) return;
+      const safeId = encodeURIComponent(name).replace(/%/g, '_');
+      const ref = doc(db, 'artifacts', appId, 'public', 'data', 'bankrolls', safeId);
+      await setDoc(ref, {
+        name,
+        balance: Number(balance),
+        updatedAt: Date.now()
+      });
+    }
+
+    async function cloudSaveTicket(ticketObj) {
+      if (!currentUser || !db || !firestoreReady) return;
+      const ref = doc(db, 'artifacts', appId, 'public', 'data', 'tickets', ticketObj.id);
+      await setDoc(ref, ticketObj);
+    }
+
+    // =====================================================================
+    // VERBATIM CHRONICLES LOADER (WEEKS 10 DOWN TO 6)
+    // =====================================================================
+    function loadBuiltInArticles() {
       const defs = [
+        { week: 10, title: 'Week 10 — Four Trades, Deadline & Obituary', tplId: 'tpl-week-10' },
         { week: 9, title: 'Week 9 — Goodbye BOP-BOP & Obituary', tplId: 'tpl-week-9' },
         { week: 8, title: 'Week 8 — Bad Beats & Burrow 51.48', tplId: 'tpl-week-8' },
         { week: 7, title: 'Week 7 — Bench Crimes & 67-Point Egg', tplId: 'tpl-week-7' },
         { week: 6, title: 'Week 6 — Commissioner’s Edition', tplId: 'tpl-week-6' }
       ];
-      return defs.map(d => {
+      state.builtInArticles = defs.map(d => {
         const tpl = document.getElementById(d.tplId);
         return {
           week: d.week,
@@ -1209,24 +1576,21 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           html: tpl ? tpl.innerHTML : '<p style="color:#fff;padding:20px;">Article content unavailable.</p>'
         };
       });
+      rebuildMergedArticles();
     }
 
-    function initArticles() {
-      const builtIn = getBuiltInArticles();
-      const savedCustom = safeLoadJSON(STORAGE_KEY_ARTICLES, []);
+    function rebuildMergedArticles() {
       const map = new Map();
-      builtIn.forEach(a => map.set(Number(a.week), a));
-      if (Array.isArray(savedCustom)) {
-        savedCustom.forEach(a => {
-          if (a && a.week && Number(a.week) !== 10 && a.html) {
-            map.set(Number(a.week), { week: Number(a.week), title: a.title || ('Week ' + a.week), html: a.html });
-          }
-        });
-      }
+      state.builtInArticles.forEach(a => map.set(Number(a.week), a));
+      Object.values(state.cloudArticles).forEach(a => map.set(Number(a.week), a));
       state.articles = Array.from(map.values()).sort((a, b) => b.week - a.week);
-      if (state.articles.length > 0) {
+
+      if (!state.articles.some(a => Number(a.week) === Number(state.activeArticleWeek)) && state.articles.length > 0) {
         state.activeArticleWeek = state.articles[0].week;
       }
+      renderChronicleSelector();
+      selectChronicleWeek(state.activeArticleWeek);
+      if (state.adminUnlocked) renderAdminWeeksList();
     }
 
     // =====================================================================
@@ -1258,12 +1622,12 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       }
 
       if (tabName === 'chronicles') {
-        setTimeout(resizeChronicleIframe, 100);
+        setTimeout(resizeChronicleIframe, 120);
       }
     }
 
     // =====================================================================
-    // TAB 1: CHRONICLES RENDERER (AUTO-SIZING VERBATIM IFRAME)
+    // TAB 1: CHRONICLES VIEWER
     // =====================================================================
     function renderChronicleSelector() {
       const bar = document.getElementById('chronicle-selector-bar');
@@ -1287,11 +1651,11 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       if (!art || !iframe) return;
 
       if (meta) meta.textContent = art.title;
-      iframe.style.height = '700px';
+      iframe.style.height = '750px';
       iframe.srcdoc = art.html;
       iframe.onload = () => {
         resizeChronicleIframe();
-        setTimeout(resizeChronicleIframe, 350);
+        setTimeout(resizeChronicleIframe, 400);
       };
     }
 
@@ -1301,39 +1665,91 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       try {
         const doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
         if (doc && doc.body) {
-          const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight, 650);
-          iframe.style.height = (h + 36) + 'px';
+          const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight, 700);
+          iframe.style.height = (h + 40) + 'px';
         }
       } catch (e) {
-        iframe.style.height = '1800px';
+        iframe.style.height = '2400px';
       }
     }
 
     // =====================================================================
-    // SLEEPER API SYNC (STANDINGS, MATCHUPS, PROJECTIONS)
+    // SLEEPER API & EXACT LEAGUE SCORING PROJECTION ENGINE
     // =====================================================================
+    function scorePlayerFromLeagueSettings(playerProjStats, scoringSettings) {
+      if (!playerProjStats || typeof playerProjStats !== 'object') return 0;
+      const s = scoringSettings || {};
+      let pts = 0;
+
+      // Multiply every projected stat key present in league scoring_settings
+      for (const [statKey, weight] of Object.entries(s)) {
+        if (typeof weight === 'number' && typeof playerProjStats[statKey] === 'number') {
+          pts += playerProjStats[statKey] * weight;
+        }
+      }
+
+      // Fallback if stat keys weren't granularly matched
+      if (pts === 0) {
+        if (typeof playerProjStats.pts_ppr === 'number' && (s.rec || 0) >= 0.8) {
+          pts = playerProjStats.pts_ppr;
+        } else if (typeof playerProjStats.pts_half_ppr === 'number' && (s.rec || 0) >= 0.4) {
+          pts = playerProjStats.pts_half_ppr;
+        } else if (typeof playerProjStats.pts_std === 'number') {
+          pts = playerProjStats.pts_std;
+        }
+      }
+
+      return Number(pts.toFixed(2));
+    }
+
+    async function fetchWeekProjections(season, week) {
+      const cacheKey = `${season}_${week}`;
+      if (state.projectionsCache[cacheKey]) return state.projectionsCache[cacheKey];
+
+      const urls = [
+        `https://api.sleeper.app/v1/projections/nfl/regular/${season}/${week}`,
+        `https://api.sleeper.app/v1/projections/nfl/regular/2025/${week}`,
+        `https://api.sleeper.app/v1/projections/nfl/regular/2024/${week}`
+      ];
+
+      for (const url of urls) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) continue;
+          const data = await res.json();
+          if (data && typeof data === 'object' && Object.keys(data).length > 50) {
+            state.projectionsCache[cacheKey] = data;
+            return data;
+          }
+        } catch (_) {}
+      }
+      state.projectionsCache[cacheKey] = {};
+      return {};
+    }
+
     async function fetchAllSleeperData(manual = false) {
       const icon = document.getElementById('refresh-icon');
       if (icon && manual) icon.classList.add('fa-spin');
 
       try {
         const [nflStateRes, leagueRes, usersRes, rostersRes] = await Promise.all([
-          fetch('https://api.sleeper.app/v1/state/nfl').then(r => r.json()).catch(() => ({ week: 10 })),
+          fetch('https://api.sleeper.app/v1/state/nfl').then(r => r.json()).catch(() => ({ season: '2026', week: 11 })),
           fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}`).then(r => r.json()),
           fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/users`).then(r => r.json()),
           fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/rosters`).then(r => r.json())
         ]);
 
         state.league = leagueRes;
+        state.scoringSettings = (leagueRes && leagueRes.scoring_settings) || {};
         state.users = Array.isArray(usersRes) ? usersRes : [];
         state.rosters = Array.isArray(rostersRes) ? rostersRes : [];
 
-        const leg = (leagueRes && leagueRes.settings && leagueRes.settings.leg) || nflStateRes.week || 10;
-        state.currentNflWeek = Math.min(Math.max(Number(leg) || 10, 1), 17);
+        state.currentNflSeason = String((leagueRes && leagueRes.season) || nflStateRes.season || '2026');
+        const leg = (leagueRes && leagueRes.settings && leagueRes.settings.leg) || nflStateRes.week || 11;
+        state.currentNflWeek = Math.min(Math.max(Number(leg) || 11, 1), 17);
         state.selectedMatchupWeek = state.currentNflWeek;
         state.selectedSportsbookWeek = state.currentNflWeek;
 
-        // Update Header League Name & Avatar
         if (leagueRes && leagueRes.name) {
           document.getElementById('league-name').textContent = leagueRes.name.toUpperCase();
         }
@@ -1341,7 +1757,6 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           document.getElementById('league-avatar').src = `https://sleepercdn.com/avatars/thumbs/${leagueRes.avatar}`;
         }
 
-        // Build unified teams array
         const userMap = {};
         state.users.forEach(u => { userMap[u.user_id] = u; });
 
@@ -1358,7 +1773,6 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           const games = Math.max(wins + losses + ties, 1);
           const ppg = fpts / games;
           const winPct = (wins + ties * 0.5) / games;
-          // Power rating combines PPG and win rate for realistic line-making
           const powerRating = ppg * 0.72 + (winPct * 100) * 0.38;
 
           return {
@@ -1378,7 +1792,6 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           };
         });
 
-        // Sort teams by Wins descending, then PF descending
         state.teams.sort((a, b) => (b.wins - a.wins) || (b.fpts - a.fpts));
 
         populateWeekDropdowns();
@@ -1389,7 +1802,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         document.getElementById('sync-badge').innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live • Wk ${state.currentNflWeek}`;
       } catch (err) {
         console.error('Sleeper sync error:', err);
-        document.getElementById('sync-badge').innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Offline Mode`;
+        document.getElementById('sync-badge').innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Offline`;
       } finally {
         if (icon) setTimeout(() => icon.classList.remove('fa-spin'), 400);
       }
@@ -1423,7 +1836,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         const isCutline = seed === 6;
         return `
           <tr class="${isCutline ? 'border-b-2 border-amber-500' : ''} hover:bg-slate-800/40 transition">
-            <td class="py-3.5 px-4 font-black ${inPlayoffs ? 'text-amber-400' : 'text-slate-500'}">
+            <td class="py-3.5 px-4 font-mono font-black ${inPlayoffs ? 'text-amber-400' : 'text-slate-500'}">
               #${seed}
             </td>
             <td class="py-3.5 px-4">
@@ -1435,13 +1848,13 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                 </div>
               </div>
             </td>
-            <td class="py-3.5 px-3 text-center font-extrabold text-white">${t.wins}-${t.losses}${t.ties ? '-' + t.ties : ''}</td>
-            <td class="py-3.5 px-3 text-center text-xs text-slate-300">${(t.winPct * 100).toFixed(1)}%</td>
-            <td class="py-3.5 px-3 text-right font-bold text-emerald-400">${t.fpts.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right text-slate-400">${t.fptsAgainst.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right font-semibold text-slate-200">${t.ppg.toFixed(1)}</td>
+            <td class="py-3.5 px-3 text-center font-mono font-extrabold text-white">${t.wins}-${t.losses}${t.ties ? '-' + t.ties : ''}</td>
+            <td class="py-3.5 px-3 text-center font-mono text-xs text-slate-300">${(t.winPct * 100).toFixed(1)}%</td>
+            <td class="py-3.5 px-3 text-right font-mono font-bold text-emerald-400">${t.fpts.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-mono text-slate-400">${t.fptsAgainst.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-mono font-semibold text-slate-200">${t.ppg.toFixed(1)}</td>
             <td class="py-3.5 px-4 text-center">
-              <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold ${inPlayoffs ? 'bg-emerald-500/15 text-emerald-400' : 'bg-slate-800 text-slate-400'}">
+              <span class="px-2.5 py-1 rounded-lg font-mono text-xs font-extrabold ${inPlayoffs ? 'bg-emerald-500/15 text-emerald-400' : 'bg-slate-800 text-slate-400'}">
                 ${t.powerRating.toFixed(1)}
               </span>
             </td>
@@ -1451,41 +1864,56 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     }
 
     // =====================================================================
-    // TAB 3: WEEKLY MATCHUPS & PROJECTIONS
+    // TAB 3: WEEKLY MATCHUPS & EXACT SLEEPER STARTER PROJECTIONS
     // =====================================================================
     async function getWeekMatchups(week) {
       if (state.matchupsCache[week]) return state.matchupsCache[week];
-      const res = await fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/matchups/${week}`).then(r => r.json()).catch(() => []);
+
+      const [matchupsRes, weekProjections] = await Promise.all([
+        fetch(`https://api.sleeper.app/v1/league/${SLEEPER_LEAGUE_ID}/matchups/${week}`).then(r => r.json()).catch(() => []),
+        fetchWeekProjections(state.currentNflSeason, week)
+      ]);
+
       const grouped = {};
-      (Array.isArray(res) ? res : []).forEach(m => {
+      (Array.isArray(matchupsRes) ? matchupsRes : []).forEach(m => {
         if (!m.matchup_id) return;
         if (!grouped[m.matchup_id]) grouped[m.matchup_id] = [];
         grouped[m.matchup_id].push(m);
       });
 
+      const computeTeamExactProjection = (matchupEntry, fallbackTeam) => {
+        const starters = Array.isArray(matchupEntry.starters) ? matchupEntry.starters : [];
+        let exactSum = 0;
+        let matchedPlayers = 0;
+
+        starters.forEach(playerId => {
+          if (!playerId || playerId === '0') return;
+          const pStats = weekProjections[playerId];
+          if (pStats) {
+            exactSum += scorePlayerFromLeagueSettings(pStats, state.scoringSettings);
+            matchedPlayers++;
+          }
+        });
+
+        // If Sleeper's projection feed returned starter projections, use exact sum;
+        // otherwise fall back cleanly to season PPG
+        if (matchedPlayers >= 3 && exactSum > 25) {
+          return Number(exactSum.toFixed(2));
+        }
+        return Number((fallbackTeam.ppg || 125).toFixed(2));
+      };
+
       const pairs = Object.keys(grouped).sort((a, b) => Number(a) - Number(b)).map(mid => {
         const pair = grouped[mid];
         const mA = pair[0] || {};
         const mB = pair[1] || {};
-        const tA = state.teams.find(t => t.rosterId === mA.roster_id) || { rosterId: mA.roster_id, teamName: `Team ${mA.roster_id}`, managerName: '', ppg: 120, powerRating: 110, avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T1' };
-        const tB = state.teams.find(t => t.rosterId === mB.roster_id) || { rosterId: mB.roster_id, teamName: `Team ${mB.roster_id}`, managerName: '', ppg: 120, powerRating: 110, avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T2' };
+        const tA = state.teams.find(t => t.rosterId === mA.roster_id) || { rosterId: mA.roster_id, teamName: `Team ${mA.roster_id}`, managerName: '', ppg: 125, powerRating: 115, avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T1' };
+        const tB = state.teams.find(t => t.rosterId === mB.roster_id) || { rosterId: mB.roster_id, teamName: `Team ${mB.roster_id}`, managerName: '', ppg: 125, powerRating: 115, avatar: 'https://placehold.co/36x36/1e293b/fbbf24?text=T2' };
 
         const ptsA = Number(mA.points || 0);
         const ptsB = Number(mB.points || 0);
-
-        // Calculate realistic starter projection:
-        // If game is completed (both > 60), projected is anchored near season PPG + slight matchup variance;
-        // If in-progress or pre-game, blends remaining starter slots * avg starter value + current points.
-        const startersA = Array.isArray(mA.starters) ? mA.starters.filter(s => s && s !== '0').length : 9;
-        const startersB = Array.isArray(mB.starters) ? mB.starters.filter(s => s && s !== '0').length : 9;
-        const seedA = ((Number(week) * 17 + Number(tA.rosterId) * 31) % 19) - 9; // -9 to +9 deterministic variance
-        const seedB = ((Number(week) * 23 + Number(tB.rosterId) * 29) % 19) - 9;
-
-        const baseProjA = Math.max(85, (tA.ppg || 122) * (startersA / 9) + seedA);
-        const baseProjB = Math.max(85, (tB.ppg || 122) * (startersB / 9) + seedB);
-
-        const projA = ptsA > baseProjA ? Number((ptsA + 4.5).toFixed(2)) : Number(baseProjA.toFixed(2));
-        const projB = ptsB > baseProjB ? Number((ptsB + 4.5).toFixed(2)) : Number(baseProjB.toFixed(2));
+        const projA = computeTeamExactProjection(mA, tA);
+        const projB = computeTeamExactProjection(mB, tB);
 
         return {
           matchupId: Number(mid),
@@ -1512,7 +1940,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     async function renderMatchupsGrid(week) {
       const grid = document.getElementById('matchups-grid');
       if (!grid) return;
-      grid.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400">Loading Week ${week} matchups & projections...</div>`;
+      grid.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400">Syncing Week ${week} matchups & calculating exact Sleeper starter projections...</div>`;
 
       const pairs = await getWeekMatchups(week);
       if (!pairs.length) {
@@ -1527,14 +1955,14 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         const metricA = hasScores ? (a.points * 0.65 + a.projected * 0.35) : a.projected;
         const metricB = hasScores ? (h.points * 0.65 + h.projected * 0.35) : h.projected;
         const totalMetric = Math.max(metricA + metricB, 1);
-        const winProbA = Math.min(Math.max(Math.round((metricA / totalMetric) * 100), 8), 92);
+        const winProbA = Math.min(Math.max(Math.round((metricA / totalMetric) * 100), 6), 94);
         const winProbB = 100 - winProbA;
 
         return `
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4 hover:border-slate-700 transition">
             <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400">
               <span>Week ${week} • Matchup #${p.matchupId}</span>
-              <span class="${hasScores ? 'text-emerald-400' : 'text-amber-400'}">${hasScores ? 'Live / Final' : 'Projected Slate'}</span>
+              <span class="${hasScores ? 'text-emerald-400' : 'text-amber-400'}">${hasScores ? 'Live / Final' : 'Sleeper Projections'}</span>
             </div>
 
             <!-- Away Team Row -->
@@ -1543,11 +1971,11 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                 <img src="${a.team.avatar}" onerror="this.src='https://placehold.co/36x36/1e293b/fbbf24?text=A'" class="w-10 h-10 rounded-xl border border-slate-700 object-cover shrink-0" />
                 <div class="min-w-0">
                   <div class="font-extrabold text-white truncate">${escapeHtml(a.team.teamName)}</div>
-                  <div class="text-xs text-slate-400">${a.team.wins}-${a.team.losses} • Proj: <strong class="text-amber-400">${a.projected.toFixed(2)}</strong></div>
+                  <div class="text-xs text-slate-400">${a.team.wins}-${a.team.losses} • Sleeper Proj: <strong class="font-mono text-amber-400">${a.projected.toFixed(2)}</strong></div>
                 </div>
               </div>
               <div class="text-right shrink-0">
-                <div class="text-2xl font-black ${a.points > h.points ? 'text-emerald-400' : 'text-white'}">${a.points.toFixed(2)}</div>
+                <div class="text-2xl font-mono font-black ${a.points > h.points ? 'text-emerald-400' : 'text-white'}">${a.points.toFixed(2)}</div>
                 <div class="text-[10px] uppercase font-bold text-slate-500">Actual Pts</div>
               </div>
             </div>
@@ -1558,18 +1986,18 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                 <img src="${h.team.avatar}" onerror="this.src='https://placehold.co/36x36/1e293b/fbbf24?text=H'" class="w-10 h-10 rounded-xl border border-slate-700 object-cover shrink-0" />
                 <div class="min-w-0">
                   <div class="font-extrabold text-white truncate">${escapeHtml(h.team.teamName)}</div>
-                  <div class="text-xs text-slate-400">${h.team.wins}-${h.team.losses} • Proj: <strong class="text-amber-400">${h.projected.toFixed(2)}</strong></div>
+                  <div class="text-xs text-slate-400">${h.team.wins}-${h.team.losses} • Sleeper Proj: <strong class="font-mono text-amber-400">${h.projected.toFixed(2)}</strong></div>
                 </div>
               </div>
               <div class="text-right shrink-0">
-                <div class="text-2xl font-black ${h.points > a.points ? 'text-emerald-400' : 'text-white'}">${h.points.toFixed(2)}</div>
+                <div class="text-2xl font-mono font-black ${h.points > a.points ? 'text-emerald-400' : 'text-white'}">${h.points.toFixed(2)}</div>
                 <div class="text-[10px] uppercase font-bold text-slate-500">Actual Pts</div>
               </div>
             </div>
 
             <!-- Win Probability Bar -->
             <div class="space-y-1.5 pt-1">
-              <div class="flex justify-between text-[11px] font-bold">
+              <div class="flex justify-between text-[11px] font-mono font-bold">
                 <span class="text-amber-400">${winProbA}% Win Prob</span>
                 <span class="text-slate-400">O/U ${(a.projected + h.projected).toFixed(1)}</span>
                 <span class="text-sky-400">${winProbB}% Win Prob</span>
@@ -1585,32 +2013,22 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     }
 
     // =====================================================================
-    // TAB 4: LEAGUE SPORTSBOOK (UNIQUE DYNAMIC ODDS & NEGATIVE BANKROLLS)
+    // TAB 4: LEAGUE SPORTSBOOK (DYNAMIC ODDS & NEGATIVE BANKROLLS)
     // =====================================================================
-    function initBankrollsAndTickets() {
-      const savedBankrolls = safeLoadJSON(STORAGE_KEY_BANKROLLS, null);
-      const savedTickets = safeLoadJSON(STORAGE_KEY_TICKETS, []);
-      if (savedBankrolls && typeof savedBankrolls === 'object') {
-        state.bankrolls = savedBankrolls;
-      }
-      if (Array.isArray(savedTickets)) {
-        state.tickets = savedTickets;
-      }
-    }
-
     function populateBettorProfiles() {
       const sel = document.getElementById('bettor-profile-select');
-      if (!sel) return;
-
+      const adminSel = document.getElementById('admin-adj-bettor');
       const names = ['Guest Bettor', ...state.teams.map(t => t.teamName)];
+
       names.forEach(name => {
         if (state.bankrolls[name] === undefined) {
           state.bankrolls[name] = 100.0;
         }
       });
-      safeSaveJSON(STORAGE_KEY_BANKROLLS, state.bankrolls);
 
-      sel.innerHTML = names.map(n => `<option value="${escapeHtml(n)}" ${n === state.activeBettor ? 'selected' : ''}>${escapeHtml(n)}</option>`).join('');
+      const opts = names.map(n => `<option value="${escapeHtml(n)}" ${n === state.activeBettor ? 'selected' : ''}>${escapeHtml(n)}</option>`).join('');
+      if (sel) sel.innerHTML = opts;
+      if (adminSel) adminSel.innerHTML = opts;
       updateBankrollUI();
     }
 
@@ -1628,10 +2046,9 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     function getDebtBadge(bal) {
       if (bal >= 250) return { label: 'High Roller', cls: 'bg-amber-500/20 text-amber-300' };
       if (bal >= 100) return { label: 'In the Black', cls: 'bg-emerald-500/15 text-emerald-400' };
-      if (bal >= 0) return { label: 'Sweating', cls: 'bg-sky-500/15 text-sky-400' };
-      if (bal > -100) return { label: 'In the Red', cls: 'bg-rose-500/20 text-rose-400' };
-      if (bal > -300) return { label: 'Loan Shark Territory', cls: 'bg-rose-600/30 text-rose-300' };
-      return { label: 'Mortgaged Future 1sts', cls: 'bg-red-900/50 text-red-200' };
+      if (bal >= 0) return { label: 'In the Trenches', cls: 'bg-sky-500/15 text-sky-400' };
+      if (bal > -150) return { label: 'Pawn Shop Regular', cls: 'bg-rose-500/20 text-rose-400' };
+      return { label: 'Loan Shark Target', cls: 'bg-red-900/50 text-red-200' };
     }
 
     function updateBankrollUI() {
@@ -1647,11 +2064,11 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       if (hdrName) hdrName.textContent = state.activeBettor;
       if (hdrBal) {
         hdrBal.textContent = formatCurrency(bal);
-        hdrBal.className = `text-xs sm:text-sm font-extrabold ${colorClass}`;
+        hdrBal.className = `text-xs sm:text-sm font-mono font-extrabold ${colorClass}`;
       }
       if (sbBal) {
         sbBal.textContent = formatCurrency(bal);
-        sbBal.className = `text-xl sm:text-2xl font-black ${colorClass}`;
+        sbBal.className = `text-xl sm:text-2xl font-mono font-black ${colorClass}`;
       }
       if (badgeEl) {
         const b = getDebtBadge(bal);
@@ -1675,37 +2092,32 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         return `
           <div class="flex items-center justify-between gap-2 bg-slate-950/80 border border-slate-800/80 px-3 py-2 rounded-xl text-xs">
             <div class="min-w-0 flex items-center gap-2">
-              <span class="font-black text-slate-500 w-4">${i + 1}.</span>
+              <span class="font-mono font-black text-slate-500 w-4">${i + 1}.</span>
               <span class="font-bold text-slate-200 truncate">${escapeHtml(item.name)}</span>
             </div>
             <div class="flex items-center gap-2 shrink-0">
               <span class="text-[10px] px-1.5 py-0.5 rounded ${badge.cls} font-semibold hidden sm:inline">${badge.label}</span>
-              <span class="font-black ${item.bal < 0 ? 'text-rose-400' : 'text-emerald-400'}">${formatCurrency(item.bal)}</span>
+              <span class="font-mono font-black ${item.bal < 0 ? 'text-rose-400' : 'text-emerald-400'}">${formatCurrency(item.bal)}</span>
             </div>
           </div>
         `;
       }).join('');
     }
 
-    // Dynamic, Non-Identical Odds Generator per Matchup
     function computeMatchupOdds(pair) {
       const a = pair.away;
       const h = pair.home;
 
-      // Combine powerRating (PPG + Win%) and projected points + slight home edge (+1.5)
-      const strengthA = (a.team.powerRating * 0.55) + (a.projected * 0.45);
-      const strengthB = (h.team.powerRating * 0.55) + (h.projected * 0.45) + 1.5;
+      // Blend exact Sleeper starter projections (65%) with season Power Rating (35%) + 1.5 home field
+      const strengthA = (a.projected * 0.65) + (a.team.powerRating * 0.35);
+      const strengthB = (h.projected * 0.65) + (h.team.powerRating * 0.35) + 1.5;
 
-      // Raw spread from home perspective (negative means home is favored)
       let rawSpread = strengthA - strengthB;
-      // Round to nearest 0.5 and avoid 0.0
       let spreadHome = Math.round(rawSpread * 2) / 2;
       if (spreadHome === 0) spreadHome = -1.5;
-      // Cap extreme spreads at 38.5
       spreadHome = Math.max(Math.min(spreadHome, 38.5), -38.5);
       const spreadAway = -spreadHome;
 
-      // Convert spread to realistic asymmetric American moneylines (distinct per game!)
       const absSp = Math.abs(spreadHome);
       let favML, dogML;
       if (absSp <= 2.5) {
@@ -1724,10 +2136,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
 
       const mlHome = spreadHome < 0 ? favML : dogML;
       const mlAway = spreadHome < 0 ? dogML : favML;
-
-      // Distinct Over/Under Total rounded to .5
-      const rawTotal = a.projected + h.projected;
-      const total = Math.round(rawTotal) + 0.5;
+      const total = Math.round(a.projected + h.projected) + 0.5;
 
       return { spreadAway, spreadHome, mlAway, mlHome, total };
     }
@@ -1748,7 +2157,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     async function renderSportsbookBoard(week) {
       const list = document.getElementById('sb-matchups-list');
       const title = document.getElementById('sb-week-title');
-      if (title) title.textContent = `Week ${week} Matchup Odds`;
+      if (title) title.textContent = `WEEK ${week} MATCHUP ODDS`;
       if (!list) return;
 
       const pairs = await getWeekMatchups(week);
@@ -1765,7 +2174,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg space-y-3">
               <div class="flex items-center justify-between text-[11px] font-bold uppercase text-slate-400">
                 <span>Week ${week} • Game ${p.matchupId}</span>
-                <span>Proj: ${p.away.projected.toFixed(1)} vs ${p.home.projected.toFixed(1)}</span>
+                <span class="font-mono">Proj: ${p.away.projected.toFixed(1)} vs ${p.home.projected.toFixed(1)}</span>
               </div>
 
               <!-- Away Team Row -->
@@ -1779,16 +2188,16 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                 </div>
                 <div class="col-span-7 sm:col-span-6 grid grid-cols-3 gap-1.5">
                   <button onclick="toggleSlipLeg('${gid}_sp', '${gid}_sp_a', '${escapeAttr(a.teamName)} ${formatSpread(odds.spreadAway)}', -110, ${week}, ${p.matchupId}, 'spread', ${a.rosterId}, ${odds.spreadAway})" id="btn_${gid}_sp_a" class="odds-btn bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl py-2 px-1 text-center transition">
-                    <div class="text-xs font-black text-amber-400">${formatSpread(odds.spreadAway)}</div>
-                    <div class="text-[10px] text-slate-400">-110</div>
+                    <div class="text-xs font-mono font-black text-amber-400">${formatSpread(odds.spreadAway)}</div>
+                    <div class="text-[10px] font-mono text-slate-400">-110</div>
                   </button>
                   <button onclick="toggleSlipLeg('${gid}_ml', '${gid}_ml_a', '${escapeAttr(a.teamName)} ML', ${odds.mlAway}, ${week}, ${p.matchupId}, 'ml', ${a.rosterId}, 0)" id="btn_${gid}_ml_a" class="odds-btn bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl py-2 px-1 text-center transition">
-                    <div class="text-xs font-black ${odds.mlAway < 0 ? 'text-emerald-400' : 'text-sky-400'}">${formatOdds(odds.mlAway)}</div>
+                    <div class="text-xs font-mono font-black ${odds.mlAway < 0 ? 'text-emerald-400' : 'text-sky-400'}">${formatOdds(odds.mlAway)}</div>
                     <div class="text-[10px] text-slate-400">ML</div>
                   </button>
                   <button onclick="toggleSlipLeg('${gid}_tot', '${gid}_tot_o', '${escapeAttr(a.teamName)}/${escapeAttr(h.teamName)} O ${odds.total}', -110, ${week}, ${p.matchupId}, 'over', 0, ${odds.total})" id="btn_${gid}_tot_o" class="odds-btn bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl py-2 px-1 text-center transition">
-                    <div class="text-xs font-black text-slate-200">O ${odds.total}</div>
-                    <div class="text-[10px] text-slate-400">-110</div>
+                    <div class="text-xs font-mono font-black text-slate-200">O ${odds.total}</div>
+                    <div class="text-[10px] font-mono text-slate-400">-110</div>
                   </button>
                 </div>
               </div>
@@ -1804,16 +2213,16 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
                 </div>
                 <div class="col-span-7 sm:col-span-6 grid grid-cols-3 gap-1.5">
                   <button onclick="toggleSlipLeg('${gid}_sp', '${gid}_sp_h', '${escapeAttr(h.teamName)} ${formatSpread(odds.spreadHome)}', -110, ${week}, ${p.matchupId}, 'spread', ${h.rosterId}, ${odds.spreadHome})" id="btn_${gid}_sp_h" class="odds-btn bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl py-2 px-1 text-center transition">
-                    <div class="text-xs font-black text-amber-400">${formatSpread(odds.spreadHome)}</div>
-                    <div class="text-[10px] text-slate-400">-110</div>
+                    <div class="text-xs font-mono font-black text-amber-400">${formatSpread(odds.spreadHome)}</div>
+                    <div class="text-[10px] font-mono text-slate-400">-110</div>
                   </button>
                   <button onclick="toggleSlipLeg('${gid}_ml', '${gid}_ml_h', '${escapeAttr(h.teamName)} ML', ${odds.mlHome}, ${week}, ${p.matchupId}, 'ml', ${h.rosterId}, 0)" id="btn_${gid}_ml_h" class="odds-btn bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl py-2 px-1 text-center transition">
-                    <div class="text-xs font-black ${odds.mlHome < 0 ? 'text-emerald-400' : 'text-sky-400'}">${formatOdds(odds.mlHome)}</div>
+                    <div class="text-xs font-mono font-black ${odds.mlHome < 0 ? 'text-emerald-400' : 'text-sky-400'}">${formatOdds(odds.mlHome)}</div>
                     <div class="text-[10px] text-slate-400">ML</div>
                   </button>
                   <button onclick="toggleSlipLeg('${gid}_tot', '${gid}_tot_u', '${escapeAttr(a.teamName)}/${escapeAttr(h.teamName)} U ${odds.total}', -110, ${week}, ${p.matchupId}, 'under', 0, ${odds.total})" id="btn_${gid}_tot_u" class="odds-btn bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl py-2 px-1 text-center transition">
-                    <div class="text-xs font-black text-slate-200">U ${odds.total}</div>
-                    <div class="text-[10px] text-slate-400">-110</div>
+                    <div class="text-xs font-mono font-black text-slate-200">U ${odds.total}</div>
+                    <div class="text-[10px] font-mono text-slate-400">-110</div>
                   </button>
                 </div>
               </div>
@@ -1830,7 +2239,6 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       const grid = document.getElementById('sb-futures-grid');
       if (!grid || !state.teams.length) return;
 
-      // Sort by powerRating descending to assign distinct futures prices
       const ranked = [...state.teams].sort((a, b) => b.powerRating - a.powerRating);
       const baseFutures = [240, 320, 450, 600, 850, 1100, 1500, 2000, 2800, 4000, 6500, 10000];
 
@@ -1843,7 +2251,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
               <div class="text-xs font-bold text-white truncate">${escapeHtml(t.teamName)}</div>
               <div class="text-[10px] text-slate-400">${t.wins}-${t.losses} • ${t.ppg.toFixed(1)} PPG</div>
             </div>
-            <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-amber-500/30 text-amber-400 font-black text-xs shrink-0">+${price}</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-amber-500/30 text-amber-400 font-mono font-black text-xs shrink-0">+${price}</span>
           </button>
         `;
       }).join('');
@@ -1864,7 +2272,6 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
 
     function toggleSlipLeg(marketKey, btnId, label, odds, week, matchupId, betType, rosterId, lineVal) {
       const existingIdx = state.slip.findIndex(l => l.btnId === btnId);
-      // Remove any conflicting selection in same marketKey
       state.slip = state.slip.filter(l => l.marketKey !== marketKey);
       if (existingIdx === -1) {
         state.slip.push({ marketKey, btnId, label, odds: Number(odds), week, matchupId, betType, rosterId, lineVal });
@@ -1953,7 +2360,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           <div class="flex items-center justify-between gap-2 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs">
             <div class="min-w-0">
               <div class="font-bold text-white truncate">${escapeHtml(l.label)}</div>
-              <div class="text-[10px] text-amber-400 font-extrabold">${formatOdds(l.odds)}</div>
+              <div class="text-[10px] font-mono text-amber-400 font-extrabold">${formatOdds(l.odds)}</div>
             </div>
             <button onclick="removeSlipLeg('${l.btnId}')" class="text-slate-500 hover:text-rose-400 p-1">
               <i class="fa-solid fa-xmark"></i>
@@ -1989,7 +2396,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       }
     }
 
-    function submitWager() {
+    async function submitWager() {
       if (!state.slip.length) return;
       const stake = Math.max(1, Number(document.getElementById('wager-input').value) || 0);
       const bettor = state.activeBettor;
@@ -1999,10 +2406,10 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         const combinedAm = decimalToAmerican(combinedDec);
         const payout = Number((stake * combinedDec).toFixed(2));
 
-        // Deduct stake (allows negative bankroll!)
-        state.bankrolls[bettor] = Number(((state.bankrolls[bettor] ?? 100) - stake).toFixed(2));
+        const nextBal = Number(((state.bankrolls[bettor] ?? 100) - stake).toFixed(2));
+        state.bankrolls[bettor] = nextBal;
 
-        state.tickets.unshift({
+        const ticket = {
           id: 'TKT-' + Date.now(),
           bettor,
           type: `${state.slip.length}-Leg Parlay`,
@@ -2011,15 +2418,20 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           stake,
           potentialPayout: payout,
           status: 'pending',
+          createdAtMs: Date.now(),
           placedAt: new Date().toLocaleDateString()
-        });
+        };
+        state.tickets.unshift(ticket);
+        await cloudSaveBankroll(bettor, nextBal);
+        await cloudSaveTicket(ticket);
       } else {
-        // Place each selection as a separate single ticket
-        state.slip.forEach((leg, idx) => {
+        let runningBal = Number(state.bankrolls[bettor] ?? 100);
+        for (let idx = 0; idx < state.slip.length; idx++) {
+          const leg = state.slip[idx];
           const dec = americanToDecimal(leg.odds);
           const payout = Number((stake * dec).toFixed(2));
-          state.bankrolls[bettor] = Number(((state.bankrolls[bettor] ?? 100) - stake).toFixed(2));
-          state.tickets.unshift({
+          runningBal = Number((runningBal - stake).toFixed(2));
+          const ticket = {
             id: 'TKT-' + (Date.now() + idx),
             bettor,
             type: 'Single',
@@ -2028,13 +2440,16 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
             stake,
             potentialPayout: payout,
             status: 'pending',
+            createdAtMs: Date.now() + idx,
             placedAt: new Date().toLocaleDateString()
-          });
-        });
+          };
+          state.tickets.unshift(ticket);
+          await cloudSaveTicket(ticket);
+        }
+        state.bankrolls[bettor] = runningBal;
+        await cloudSaveBankroll(bettor, runningBal);
       }
 
-      safeSaveJSON(STORAGE_KEY_BANKROLLS, state.bankrolls);
-      safeSaveJSON(STORAGE_KEY_TICKETS, state.tickets);
       clearSlip();
       updateBankrollUI();
     }
@@ -2058,15 +2473,15 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         return `
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 space-y-1.5 text-xs">
             <div class="flex items-center justify-between">
-              <span class="font-extrabold text-slate-200">${escapeHtml(t.type)} (${formatOdds(t.odds)})</span>
+              <span class="font-extrabold text-slate-200">${escapeHtml(t.type)} <span class="font-mono text-amber-400">(${formatOdds(t.odds)})</span></span>
               <span class="px-2 py-0.5 rounded border text-[10px] font-extrabold uppercase ${statusStyles[t.status] || statusStyles.pending}">${t.status}</span>
             </div>
             <div class="space-y-0.5 text-slate-400">
-              ${t.legs.map(l => `<div>• ${escapeHtml(l.label)}</div>`).join('')}
+              ${(t.legs || []).map(l => `<div>• ${escapeHtml(l.label)}</div>`).join('')}
             </div>
-            <div class="flex items-center justify-between pt-1 border-t border-slate-800/80 text-[11px]">
-              <span>Risk: <strong class="text-white">$${t.stake.toFixed(2)}</strong></span>
-              <span>To Return: <strong class="text-emerald-400">$${t.potentialPayout.toFixed(2)}</strong></span>
+            <div class="flex items-center justify-between pt-1 border-t border-slate-800/80 font-mono text-[11px]">
+              <span>Risk: <strong class="text-white">$${Number(t.stake).toFixed(2)}</strong></span>
+              <span>Return: <strong class="text-emerald-400">$${Number(t.potentialPayout).toFixed(2)}</strong></span>
             </div>
           </div>
         `;
@@ -2080,7 +2495,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         let allLegsFinal = true;
         let allLegsWon = true;
 
-        for (const leg of t.legs) {
+        for (const leg of (t.legs || [])) {
           if (!leg.week || leg.betType === 'future') {
             allLegsFinal = false;
             break;
@@ -2112,18 +2527,17 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
           gradedAny = true;
           if (allLegsWon) {
             t.status = 'won';
-            state.bankrolls[t.bettor] = Number(((state.bankrolls[t.bettor] ?? 100) + t.potentialPayout).toFixed(2));
+            const nextBal = Number(((state.bankrolls[t.bettor] ?? 100) + Number(t.potentialPayout)).toFixed(2));
+            state.bankrolls[t.bettor] = nextBal;
+            await cloudSaveBankroll(t.bettor, nextBal);
           } else {
             t.status = 'lost';
           }
+          await cloudSaveTicket(t);
         }
       }
 
-      if (gradedAny) {
-        safeSaveJSON(STORAGE_KEY_BANKROLLS, state.bankrolls);
-        safeSaveJSON(STORAGE_KEY_TICKETS, state.tickets);
-        updateBankrollUI();
-      }
+      if (gradedAny) updateBankrollUI();
     }
 
     // =====================================================================
@@ -2163,7 +2577,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
     function showAdminWorkspace() {
       document.getElementById('admin-lock-screen').classList.add('hidden');
       document.getElementById('admin-workspace').classList.remove('hidden');
-      const maxWeek = state.articles.reduce((m, a) => Math.max(m, Number(a.week)), 9);
+      const maxWeek = state.articles.reduce((m, a) => Math.max(m, Number(a.week)), 10);
       document.getElementById('new-week-num').value = maxWeek + 1;
       document.getElementById('new-week-title').value = `The Weekly Grind — Week ${maxWeek + 1}`;
       renderAdminWeeksList();
@@ -2178,13 +2592,10 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       setTimeout(() => toast.classList.add('hidden'), 3500);
     }
 
-    function persistCustomArticles() {
-      safeSaveJSON(STORAGE_KEY_ARTICLES, state.articles);
-    }
-
-    function publishNewChronicle() {
+    async function publishNewChronicle() {
       const week = Number(document.getElementById('new-week-num').value);
       const title = (document.getElementById('new-week-title').value || '').trim() || `The Weekly Grind — Week ${week}`;
+      const subtitle = (document.getElementById('new-week-subtitle').value || '').trim();
       const html = (document.getElementById('new-week-html').value || '').trim();
 
       if (!week || !html) {
@@ -2192,20 +2603,17 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         return;
       }
 
-      const idx = state.articles.findIndex(a => Number(a.week) === week);
-      if (idx >= 0) {
-        state.articles[idx] = { week, title, html };
-      } else {
-        state.articles.push({ week, title, html });
-      }
-      state.articles.sort((a, b) => b.week - a.week);
-      persistCustomArticles();
+      const newArticle = { week, title, subtitle, html, isCloud: true };
+      state.cloudArticles[week] = newArticle;
+      rebuildMergedArticles();
+      await cloudSaveChronicle(newArticle);
 
       document.getElementById('new-week-html').value = '';
+      document.getElementById('new-week-subtitle').value = '';
       renderAdminWeeksList();
       selectChronicleWeek(week);
       switchTab('chronicles');
-      showAdminToast(`Published Week ${week} to Weekly Chronicles!`);
+      showAdminToast(`Published & Cloud-Saved Week ${week}!`);
     }
 
     function renderAdminWeeksList() {
@@ -2214,7 +2622,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       list.innerHTML = state.articles.map(a => `
         <div class="flex items-center justify-between gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs">
           <div class="min-w-0">
-            <span class="font-extrabold text-amber-400 mr-2">Week ${a.week}</span>
+            <span class="font-mono font-extrabold text-amber-400 mr-2">Week ${a.week}</span>
             <span class="text-slate-200 font-semibold truncate">${escapeHtml(a.title)}</span>
           </div>
           <div class="flex items-center gap-2 shrink-0">
@@ -2240,30 +2648,39 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       document.getElementById('admin-edit-box').classList.add('hidden');
     }
 
-    function saveEditedWeek() {
+    async function saveEditedWeek() {
       if (state.editingWeekNum === null) return;
-      const art = state.articles.find(a => Number(a.week) === state.editingWeekNum);
+      const week = state.editingWeekNum;
+      const art = state.articles.find(a => Number(a.week) === week);
       if (!art) return;
-      art.title = document.getElementById('edit-week-title').value.trim() || art.title;
-      art.html = document.getElementById('edit-week-html').value;
-      persistCustomArticles();
+
+      const updated = {
+        week,
+        title: document.getElementById('edit-week-title').value.trim() || art.title,
+        subtitle: art.subtitle || '',
+        html: document.getElementById('edit-week-html').value,
+        isCloud: true
+      };
+      state.cloudArticles[week] = updated;
+      rebuildMergedArticles();
+      await cloudSaveChronicle(updated);
+
       cancelEditWeek();
       renderAdminWeeksList();
-      if (state.activeArticleWeek === art.week) selectChronicleWeek(art.week);
-      showAdminToast(`Saved updates to Week ${art.week}.`);
+      selectChronicleWeek(week);
+      showAdminToast(`Saved changes to Week ${week} in Cloud.`);
     }
 
-    function deleteChronicleWeek(week) {
+    async function deleteChronicleWeek(week) {
       if (state.articles.length <= 1) {
         showAdminToast('At least one newsletter must remain in the archive.');
         return;
       }
-      state.articles = state.articles.filter(a => Number(a.week) !== Number(week));
-      persistCustomArticles();
+      delete state.cloudArticles[Number(week)];
+      state.builtInArticles = state.builtInArticles.filter(a => Number(a.week) !== Number(week));
+      rebuildMergedArticles();
+      await cloudDeleteChronicle(Number(week));
       renderAdminWeeksList();
-      if (state.activeArticleWeek === Number(week)) {
-        selectChronicleWeek(state.articles[0].week);
-      }
       showAdminToast(`Removed Week ${week}.`);
     }
 
@@ -2275,7 +2692,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       ta.value = JSON.stringify(state.articles.map(a => ({ week: a.week, title: a.title, html: a.html })));
       ta.select();
       try { document.execCommand('copy'); } catch (_) {}
-      showAdminToast('Archive JSON copied to clipboard!');
+      showAdminToast('Archive JSON backup copied to clipboard!');
     }
 
     function renderAdminTicketsQueue() {
@@ -2290,7 +2707,7 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
         <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs">
           <div class="min-w-0">
             <div class="font-bold text-white">${escapeHtml(t.bettor)} • ${escapeHtml(t.type)} ($${t.stake})</div>
-            <div class="text-[11px] text-slate-400 truncate">${t.legs.map(l => l.label).join(' + ')}</div>
+            <div class="text-[11px] text-slate-400 truncate">${(t.legs || []).map(l => l.label).join(' + ')}</div>
           </div>
           <div class="flex items-center gap-1.5">
             <button onclick="adminSettleTicket('${t.id}', 'won')" class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold">Win</button>
@@ -2301,30 +2718,46 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       `).join('');
     }
 
-    function adminSettleTicket(ticketId, outcome) {
+    async function adminSettleTicket(ticketId, outcome) {
       const t = state.tickets.find(x => x.id === ticketId);
       if (!t || t.status !== 'pending') return;
       t.status = outcome;
       if (outcome === 'won') {
-        state.bankrolls[t.bettor] = Number(((state.bankrolls[t.bettor] ?? 100) + t.potentialPayout).toFixed(2));
+        const nextBal = Number(((state.bankrolls[t.bettor] ?? 100) + Number(t.potentialPayout)).toFixed(2));
+        state.bankrolls[t.bettor] = nextBal;
+        await cloudSaveBankroll(t.bettor, nextBal);
       } else if (outcome === 'push') {
-        state.bankrolls[t.bettor] = Number(((state.bankrolls[t.bettor] ?? 100) + t.stake).toFixed(2));
+        const nextBal = Number(((state.bankrolls[t.bettor] ?? 100) + Number(t.stake)).toFixed(2));
+        state.bankrolls[t.bettor] = nextBal;
+        await cloudSaveBankroll(t.bettor, nextBal);
       }
-      safeSaveJSON(STORAGE_KEY_BANKROLLS, state.bankrolls);
-      safeSaveJSON(STORAGE_KEY_TICKETS, state.tickets);
+      await cloudSaveTicket(t);
       renderAdminTicketsQueue();
       updateBankrollUI();
       showAdminToast(`Ticket marked ${outcome.toUpperCase()}.`);
     }
 
-    function resetAllBankrolls() {
-      Object.keys(state.bankrolls).forEach(k => { state.bankrolls[k] = 100.0; });
-      safeSaveJSON(STORAGE_KEY_BANKROLLS, state.bankrolls);
+    async function adminSetExactBankroll() {
+      const bettor = document.getElementById('admin-adj-bettor').value;
+      const val = Number(document.getElementById('admin-adj-amount').value);
+      if (!bettor || Number.isNaN(val)) return;
+      state.bankrolls[bettor] = Number(val.toFixed(2));
+      await cloudSaveBankroll(bettor, state.bankrolls[bettor]);
+      updateBankrollUI();
+      showAdminToast(`Updated ${bettor} bankroll to ${formatCurrency(state.bankrolls[bettor])}.`);
+    }
+
+    async function resetAllBankrolls() {
+      const keys = Object.keys(state.bankrolls);
+      for (const k of keys) {
+        state.bankrolls[k] = 100.0;
+        await cloudSaveBankroll(k, 100.0);
+      }
       updateBankrollUI();
       showAdminToast('All league bankrolls reset to $100.00.');
     }
 
-    // String escaping helpers
+    // String Escaping Helpers
     function escapeHtml(str) {
       return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
     }
@@ -2332,15 +2765,44 @@ footer{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;color:v
       return String(str || '').replace(/['"\\]/g, '');
     }
 
+    // Expose functions to global scope for inline HTML handlers
+    Object.assign(window, {
+      switchTab,
+      selectChronicleWeek,
+      resizeChronicleIframe,
+      fetchAllSleeperData,
+      selectMatchupWeek,
+      changeSportsbookWeek,
+      switchBettorProfile,
+      toggleSlipLeg,
+      removeSlipLeg,
+      clearSlip,
+      setSlipMode,
+      setQuickWager,
+      updateSlipSummary,
+      submitWager,
+      autoGradeCompletedTickets,
+      openAdminModal,
+      closeAdminModal,
+      unlockAdminStudio,
+      publishNewChronicle,
+      openEditWeek,
+      cancelEditWeek,
+      saveEditedWeek,
+      deleteChronicleWeek,
+      exportPermanentHtml,
+      adminSettleTicket,
+      adminSetExactBankroll,
+      resetAllBankrolls
+    });
+
     // =====================================================================
     // BOOTSTRAP APPLICATION
     // =====================================================================
     window.addEventListener('DOMContentLoaded', () => {
-      initArticles();
-      initBankrollsAndTickets();
-      renderChronicleSelector();
-      selectChronicleWeek(state.activeArticleWeek);
+      loadBuiltInArticles();
       updateBankrollUI();
+      initCloudPersistence();
       fetchAllSleeperData(false);
     });
   </script>
